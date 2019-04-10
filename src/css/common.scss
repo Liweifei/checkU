@@ -1,0 +1,17 @@
+@mixin bgCover($url){
+    background-image: url(#{$url});
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@mixin widthHeight100(){
+    width: 100%;
+    height: 100%;
+}
+
+@mixin positionCenter($width,$height){
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: #{-$height/2+"px"} 0 0 #{-$width/2+"PX"};
+}
