@@ -30,8 +30,6 @@ const userInfo={
 // 使用 es6 语法把vuex的实例对象输出
 export default new Vuex.Store({
   modules:{
-    nav:nav,
     userInfo:userInfo,
-    tabs:tabs,
   }
 })

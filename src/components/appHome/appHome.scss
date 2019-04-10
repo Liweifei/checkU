@@ -1,0 +1,38 @@
+
+.home{
+    @include widthHeight100();
+    background-color: #f2f2f2;
+
+    .homeLeft{
+        float: left;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+    }
+    .homeRight{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding-left: 200px;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        z-index: 0;
+        transition: all 0.3s ease-in-out;
+        background-color: #fff;
+        
+        .contain{
+            width: 100%;
+            padding-left: 10px;
+            overflow-x: hidden;
+        }
+    }
+    .navCollapseRight{
+        padding-left: 64px;
+    }
+}
+.el-submenu__title i,.el-menu-item i{
+    color: #fff;
+}
+i{
+    cursor: pointer;
+}

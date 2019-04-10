@@ -15,3 +15,24 @@
     top: 50%;
     margin: #{-$height/2+"px"} 0 0 #{-$width/2+"PX"};
 }
+
+*,html,body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    color:#fff;
+    text-decoration:none
+}
+em{
+    font-style:normal
+}
+li{
+    list-style:none
+}
+html,body{
+    @include widthHeight100();
+}
+#app{
+    @include widthHeight100();
+}

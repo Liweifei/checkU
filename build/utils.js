@@ -66,7 +66,7 @@ exports.cssLoaders = function (options) {
       options: {
         // 需要全局引入的sass文件，这里引入了的scss文件，在所有的.vue文件都可以用到这份css样式，
         // 下面的resources接受一个数组，可以添加多个scss文件
-          resources: [path.resolve(__dirname, '../src/common/common.scss')]
+          resources: [path.resolve(__dirname, '../src/common/css/common.scss')]
         }
       }
     ),
