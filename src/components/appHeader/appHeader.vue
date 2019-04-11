@@ -22,7 +22,7 @@
             </el-dropdown-menu>
         </el-dropdown>
         <span class="headItem">
-            <router-link to="/">高效匹配</router-link>
+            <router-link to="/">高校匹配</router-link>
         </span>
         <span class="headItem">
             <router-link to="/">问答</router-link>

@@ -16,9 +16,18 @@
     margin: #{-$height/2+"px"} 0 0 #{-$width/2+"PX"};
 }
 
+@mixin btnSymbol($color,$unit:"#"){
+    background-color: #{$unit}#{$color} !important;
+    border-color: #{$unit}#{$color} !important;
+}
+
 *,html,body{
     margin: 0;
     padding: 0;
+}
+*:focus{
+    border: 0;
+    outline: none;
 }
 a{
     color:#fff;
@@ -27,6 +36,13 @@ a{
 em{
     font-style:normal
 }
+select{
+    outline: none;
+}
+button{
+    outline: none;
+    border: none;
+}
 li{
     list-style:none
 }
@@ -34,5 +50,10 @@ html,body{
     @include widthHeight100();
 }
 #app{
-    @include widthHeight100();
+    background-color: #f7f7f7;
 }
+.containMain{
+    width: 1200px;
+    margin: auto;
+}
+
