@@ -18,7 +18,9 @@
 
 @mixin btnSymbol($color,$unit:"#"){
     background-color: #{$unit}#{$color} !important;
-    border-color: #{$unit}#{$color} !important;
+    border: 1px solid #{$unit}#{$color} !important;
+    color: #fff !important;
+    outline: none !important;
 }
 
 *,html,body{
@@ -48,12 +50,23 @@ li{
 }
 html,body{
     @include widthHeight100();
+    background-color: #f7f7f7;
 }
 #app{
     background-color: #f7f7f7;
 }
+
+// 主内容去宽度定义
 .containMain{
     width: 1200px;
     margin: auto;
+    overflow-x: hidden;
+}
+
+// 单行文字溢出省略号
+.wEllipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 

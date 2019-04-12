@@ -216,8 +216,184 @@
     }
     .highSchool{
         margin-top: 20px;
+
+        .carousel,.el-carousel,.el-carousel__container{
+            height: 220px;
+        }
+        .el-carousel__arrow{
+            width: 24px;
+            height: 40px;
+            border-radius: 0%;
+            background-color: rgba(0,0,0,.3);
+            font-size: 18px;
+        }
         .main{
             margin-top: 12px;
+
+            .schoolItem{
+                width: 380px;
+                height: 220px;
+                padding: 12px 12px 20px 12px;
+                float: left;
+                background-color: #fff;
+                box-sizing: border-box;
+
+                &+li{
+                    margin-left: 30px;
+                }
+                
+                .head{
+                    float: left;
+
+                    .schoolImg{
+                        width: 80px;
+                        height: 80px;
+                        float: left;
+                    }
+                    .name{
+                        width: 200px;
+                        margin-left: 10px;
+                        float: left;
+                        color: #333333;
+
+                        .nameCn{
+                            font-size: 18px;
+                            margin: 14px 0 2px 0;
+                        }
+                        .nameEn{
+                            font-size: 16px;
+                        }
+                    }
+                }
+                .descrition{
+                    float: left;
+                    width: 100%;
+                    margin: 24px 0 20px 0;
+                    font-size: 16px;
+                }
+                .otherInfo{
+                    text-align: center;
+
+                    li{
+                        float: left;
+                        color: #888888;
+
+                        &:nth-child(2){
+                            float: none;
+                            display: inline-block;
+                        }
+                        &:last-child{
+                            float: right;
+                        }
+                    }
+                }
+                button{
+                    @include btnSymbol("60b17a");
+                }
+            }
+        }
+    }
+    .hotTopic{
+        margin-top: 20px;
+        
+        .leftContain{
+            height: 488px;
+            box-sizing: border-box;
+            padding-top: 18px;
+            width: 800px;
+            float: left;
+            background-color: #fff;
+
+            .topicList{
+                padding: 0 12px 0 12px;
+                
+                li{
+                    padding-top: 18px;
+
+                    &+li{
+                        border-top: 1px dashed #dddddd;
+                    }
+                    h3{
+                        font-size: 18px;
+                        color: #333333;
+                    }
+                    .info{
+                        margin-top: 8px;
+                        line-height: 40px;
+                        vertical-align: middle;
+                        font-size: 16px;
+                        color: #333333;
+                        img{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            vertical-align: middle;
+                        }
+                        i{
+                            margin-right: 10px;
+                        }
+                        .commentNum{
+                            float: right;
+                            color: #999999;
+                            margin-right: 40px;
+                        }
+                        .likeNum{
+                            float: right;
+                            color: #60b17a;
+                        }
+                    }
+                    .content{
+                        margin-top: 8px;
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+        }
+        .rightContain{
+            width: 380px;
+            height: 488px;
+            padding-top: 18px;
+            box-sizing: border-box;
+            float: right;
+            background-color: #fff;
+            .moduleHead{
+                text-align: center;
+                position: relative;
+
+                .headIcon{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+                .studyTypeList{
+                    display: inline-block;
+                    li{
+                        float: left;
+                        padding: 0 16px;
+                        font-size: 18px;
+                        cursor: pointer;
+                        
+                        &+li{
+                            border-left: 1px solid #a8a8a8;
+                        }
+                    }
+                    .studyTypeSelected{
+                        color: #60b17a;
+                    }
+                }
+            }
+            .content{
+                li{
+                    margin-top: 19px;
+                    padding: 0 8px;
+                    text-align: left;
+
+                    i{
+                        color: #60b17a;
+                        margin-right: 6px;
+                    }
+                }
+            }
         }
     }
 }
@@ -239,6 +415,7 @@
         float: right;
         color: #60b17a;
         line-height: 28px;
+        cursor: pointer;
     }
 }
 .moduleHeadBorder{
