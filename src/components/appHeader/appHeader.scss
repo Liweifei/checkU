@@ -19,6 +19,13 @@
         color: #fff;
         line-height: normal;
 
+        .el-dropdown-link{
+            font-size: 16px;
+
+            &:hover{
+                color: #b8b8b8;
+            }
+        }
         i{
             margin-left: 16px;
         }
@@ -29,6 +36,10 @@
     }
     .headItem{
         margin-left: 60px;
+
+        &:hover a{
+            color: #b8b8b8;
+        }
     }
     .headerRight{
         float: right;
@@ -39,7 +50,12 @@
         .iconItem{
             margin-right: 30px;
             font-size: 30px;
-            vertical-align: middle
+            vertical-align: middle;
+            cursor: pointer;
+            
+            &:hover{
+                color: #b8b8b8;
+            }
         }
         .headprotrait{
             width: 40px;
@@ -52,4 +68,12 @@
             margin-left: 10px;
         }
     }
+}
+.notIndexBg{
+    background-color: #60b17a;
+
+    .el-dropdown .el-dropdown-link:hover,.headItem:hover a,.headerRight .iconItem:hover{
+        color: #96d5aa;
+    }
+    
 }

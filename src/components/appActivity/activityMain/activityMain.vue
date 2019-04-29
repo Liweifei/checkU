@@ -1,0 +1,97 @@
+<template>
+    <div class="activityMain">
+        <!-- 头部 -->
+        <app-header not-index="true"></app-header>
+        <!-- 内容区 -->
+        <div class="headSearchBox">
+            <div class="contain">
+                <ul class="tabs">
+                    <li v-for="(item,index) in tabs" :class="{'selected':item.type==thisRoute}" @click="changeView(item)">
+                        <span>{{item.label}}</span>
+                    </li>
+                </ul>
+                <search-input placeholder="请输入关键词"></search-input>
+            </div>
+        </div>
+        <router-view></router-view>
+        <!-- 底部 -->
+        <app-footer></app-footer>
+    </div>
+</template>
+
+<script type="text/javascript">
+    import appHeader from "@/components/appHeader/appHeader";
+    import appFooter from "@/components/appFooter/appFooter";
+    import appSearchInput from "@/components/appSearchInput/appSearchInput";
+    let self;
+    export default{
+        name: 'activityMain',
+        data(){
+            return{
+                tabs:[
+                    {
+                        label:"学科竞赛",
+                        path:"/activityMain/disciplineCompetition/disciplineCompetition",
+                        type:"disciplineCompetition",
+                    },
+                    {
+                        label:"志愿服务",
+                        path:"/activityMain/disciplineCompetition/disciplineCompetition2",
+                        type:"disciplineCompetition2",
+                    },
+                    {
+                        label:"科研项目",
+                        path:"/activityMain/disciplineCompetition/disciplineCompetition3",
+                        type:"disciplineCompetition3",
+                    },
+                    {
+                        label:"综合能力",
+                        path:"/activityMain/disciplineCompetition/disciplineCompetition4",
+                        type:"disciplineCompetition4",
+                    },
+                ],
+                thisRoute:null,
+            }
+        },
+        methods: {
+            changeView(item){//点击tab改变路由
+                self.thisRoute=item.type;
+                self.$router.replace({
+                    path:item.path,
+                })
+            },
+            changeViewFromPage(){//从其它界面进入时候需要改变路由
+                self.thisRoute=self.$route.params.type;
+                let path;
+                self.tabs.forEach((item)=>{
+                    if(item.type==self.thisRoute){
+                        path=item.path;
+                    }
+                })
+                self.$router.replace({
+                    path:path,
+                })
+            }
+        },
+        created(){
+            self=this;
+            self.changeViewFromPage();
+        },
+        watch:{
+            $route(){
+                if(this.$route.params.type!==this.thisRoute){
+                    this.changeViewFromPage();
+                }
+            }
+        },
+        components:{
+            "app-header":appHeader,
+            "app-footer":appFooter,
+            "search-input":appSearchInput,
+        }
+    }
+
+</script>
+<style lang="scss">
+    @import './activityMain.scss';
+</style>

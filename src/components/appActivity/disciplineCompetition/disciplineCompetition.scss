@@ -1,0 +1,114 @@
+.disciplineCompetition{
+    width: 100%;
+    
+    .selectionList{
+        color: #333333;
+        padding: 30px 0 12px 0;
+        border-radius: 12px;
+        margin-top: 20px !important;
+        background: #fff;
+        box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+
+        .name{
+            display: inline-block;
+            line-height: 32px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .item{
+            margin-left: 40px;
+            margin-bottom: 12px;
+            
+            ul{
+                display: inline-block;
+                
+                li{
+                    display: inline-block;
+                    width: 68px;
+                    height: 32px;
+                    line-height: 32px;
+                    text-align: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+                .selected{
+                    border-radius: 16px;
+                    background: $mainColor;
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .contain{
+        background-color: #fff;
+        margin-top: 28px;
+
+        .sort{
+            float: left;
+            width: 120px;
+            text-align: center;
+            
+        }
+        .name{
+            float: left;
+            width: 960px;
+            padding-left: 80px;
+            box-sizing: border-box;
+        }
+        .attention{
+            float: left;
+            width: 120px;
+            text-align: left;
+
+            img{
+                cursor: pointer;
+            }
+        }
+        .head{
+            height: 68px;
+            line-height: 68px;
+            border-bottom: 1px solid #efefef;
+            color: #999999;
+            font-size: 16px;
+        }
+        .list{
+            line-height: 68px;
+
+            li{
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                color: #666666;
+                font-size: 16px;
+
+                &:after{
+                    content: "";
+                    width: 1116px;
+                    position: absolute;
+                    left: 50%;
+                    margin-left: -558px;
+                    bottom: 0;
+                    border-bottom: 1px dashed #efefef;
+                }
+                .name{
+                    font-size: 18px;
+                    color: #333333;
+                    font-weight: bold;
+
+                    .subTitle{
+                        color: #666666;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+    .pagination{
+        text-align: center;
+        margin-top: 48px;
+
+        .el-pagination{
+            display: inline-block;
+        }
+    }
+}

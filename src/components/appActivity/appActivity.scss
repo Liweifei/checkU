@@ -1,0 +1,55 @@
+.appActivity{
+    width: 100%;
+    overflow: hidden;
+    padding-top: 80px;
+    
+    .contain{
+        display: block;
+        width: 960px;
+        margin: auto;
+        margin-top: 40px;
+
+        li{
+            display: block;
+            width: 100%;
+            overflow: hidden;
+
+            &+li{
+                margin-top: 52px;
+            }
+            .info{
+                float: left;
+                position: relative;
+
+                .el-image{
+                    cursor: pointer;
+                }
+                p{
+                    position: absolute;
+                    font-family: "SimSun";
+                    font-size: 24px;
+                    color: #333;
+                    font-weight: bold;
+                    position: absolute;
+                    left: 100%;
+                    top: 50%;
+                    margin-top: -12px;
+                    margin-left: 40px;
+                    white-space: nowrap;
+                    cursor: pointer;
+                }
+            }
+            &:nth-child(2n){
+                .info{
+                    float: right;
+
+                    p{
+                        left: auto;
+                        right: 100%;
+                        margin-right: 40px;
+                    }
+                }
+            }
+        }
+    }
+}

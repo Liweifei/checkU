@@ -45,7 +45,7 @@
                     </div>
                     <ul class="list">
                         <li v-for="(item,index) in newAnnouncementList">
-                            <i class="el-icon-arrow-right"></i>
+                            <span class="circle"></span>
                             {{item}}
                         </li>
                     </ul>
@@ -122,7 +122,7 @@
                                     <i class="el-icon-info"></i>{{item.commentNum}}
                                 </span>
                             </div>
-                            <p class="content" v-html="item.content"></p>
+                            <p class="content">{{item.content | wordLengthControl}}</p>
                         </li>
                     </ul>
                 </div>
@@ -137,8 +137,8 @@
                     </div>
                     <div class="content">
                         <ul v-for="(item,index) in studyTypeContentList">
-                            <li v-for="(list,listIndex) in item.data">
-                                <i class="el-icon-arrow-right"></i>{{list}}
+                            <li v-for="(list,listIndex) in item.data" class="wEllipsis">
+                                <span class="circle"></span>{{list}}
                             </li>
                         </ul>
                     </div>
@@ -251,7 +251,7 @@
                         personImg:require("img/sm.jpg"),
                         commentNum:603,//评论数
                         likeNum:"1K",//点赞数
-                        content:"1、申请费<br/>申请人(学生)交给学校用于审核自己申请自己材料的费用。一般来说，美国的高中、本科和研究生阶段的申请费相差不是很大，一般是从30美元到75美元不等。根据统计，中国学生一般会申请8-10所学校，这样算下来，申请费用的花费在240美元到750美元这个区间。",
+                        content:"1、申请费,申请人(学生)交给学校用于审核自己申请自己材料的费用。一般来说，美国的高中、本科和研究生阶段的申请费相差不是很大，一般是从30美元到75美元不等。根据统计，中国学生一般会申请8-10所学校，这样算下来，申请费用的花费在240美元到750美元这个区间。一般来说，美国的高中、本科和研究生阶段的申请费相差不是很大，一般是从30美元到75美元不等。根据统计，中国学生一般会申请8-10所学校，这样算下来，申请费用的花费在240美元到750美元这个区间。",
                     },
                     {
                         title:"哪些学校在人工智能专业方向更有竞争力？",
@@ -259,7 +259,7 @@
                         personImg:require("img/ma.jpg"),
                         commentNum:8,//评论数
                         likeNum:"39",//点赞数
-                        content:"美国无疑是MIT最好，其次是斯坦福、卡内基梅隆、加州大学伯克利分校、华盛顿大学、德州大学奥斯丁分校、宾州大学、康奈尔等。排名是：<br/>1.东京大学<br/>2. Kyoto University 京都大学",
+                        content:"美国无疑是MIT最好，其次是斯坦福、卡内基梅隆、加州大学伯克利分校、华盛顿大学、德州大学奥斯丁分校、宾州大学、康奈尔等。排名是：1.东京大学2. Kyoto University 京都大学",
                     },
                 ],
                 studyTypeList:[
@@ -309,6 +309,13 @@
         },
         mounted(){
             
+        },
+        filters:{
+            wordLengthControl(value){
+                console.log(value.length)
+                let words=value.length>150?value.substring(0,150)+"...":value;
+                return words;
+            }
         },
         components:{
             "app-header":appHeader,

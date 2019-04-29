@@ -9,6 +9,33 @@ export default new Router({
       path: '/',
       name: 'appHome',
       component: () => import('@/components/appHome/appHome')//首页
+    },
+    {
+      path: '/appMatching',
+      name: 'appMatching',
+      component: () => import('@/components/appMatching/appMatching')//匹配
+    },
+    {
+      path: '/appHighSchool',
+      name: 'appHighSchool',
+      component: () => import('@/components/appHighSchool/appHighSchool')//高校
+    },
+    {
+      path: '/appActivity',
+      name: 'appActivity',
+      component: () => import('@/components/appActivity/appActivity'),//活动列表
+    },
+    {
+      path: '/activityMain/:type',
+      name: 'activityMain',
+      component: () => import('@/components/appActivity/activityMain/activityMain'),//活动内容
+      children:[
+        {
+          path: 'disciplineCompetition',
+          name: 'disciplineCompetition',
+          component: () => import('@/components/appActivity/disciplineCompetition/disciplineCompetition'),//学科竞赛
+        }
+      ]
     }
   ]
 })

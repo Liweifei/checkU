@@ -1,0 +1,23 @@
+.appSearchInput{
+    width: 520px;
+    margin: auto;
+    margin-top: 20px;
+    position: relative;
+
+    .el-input{
+        input{
+            height: 44px;
+            line-height: 44px;
+            border-radius: 22px;
+            background-color: #e8e8e8;
+            border: none;
+            padding-right: 38px;
+            font-size: 16px;
+        }
+    }
+    img{
+        position: absolute;
+        right: 20px;
+        top: 13px;
+    }
+}
