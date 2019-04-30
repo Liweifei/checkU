@@ -31,11 +31,21 @@ export default new Router({
       component: () => import('@/components/appActivity/activityMain/activityMain'),//活动内容
       children:[
         {
-          path: 'disciplineCompetition',
+          path: 'disciplineCompetition',//学科竞赛
           name: 'disciplineCompetition',
-          component: () => import('@/components/appActivity/disciplineCompetition/disciplineCompetition'),//学科竞赛
+          component: () => import('@/components/appActivity/activityMain/disciplineCompetition/disciplineCompetition'),//学科竞赛
+        },
+        {
+          path: 'voluntaryService',//志愿服务
+          name: 'voluntaryService',
+          component: () => import('@/components/appActivity/activityMain/voluntaryService/voluntaryService'),//学科竞赛
         }
       ]
+    },
+    {
+      path: '/activityDetail',//详情
+      name: 'activityDetail',
+      component: () => import('@/components/appActivity/activityDetail/activityDetail'),
     }
   ]
 })

@@ -1,6 +1,8 @@
 <template>
 	<div class="appHeader" :class="{'notIndexBg':notIndex}">
-        <img :src="logo" alt="error" class="logo">
+        <router-link to="/">
+            <img :src="logo" alt="error" class="logo">
+        </router-link>
         <el-dropdown class="highSchool" @command="openUrl">
             <span class="el-dropdown-link">
                 高校<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
@@ -9,7 +11,7 @@
                 <el-dropdown-item v-for="(item,index) in highSchoolList" :command="item.url">{{item.label}}</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-        <el-dropdown class="schoolWork">
+        <!-- <el-dropdown class="schoolWork">
             <span class="el-dropdown-link" @click="openUrl('/appActivity')">
                 活动<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
             </span>
@@ -18,9 +20,12 @@
                 <el-dropdown-item>狮子头</el-dropdown-item>
                 <el-dropdown-item>螺蛳粉</el-dropdown-item>
             </el-dropdown-menu>
-        </el-dropdown>
+        </el-dropdown> -->
+        <span class="headItem schoolWork">
+            <router-link :to="{name:'appActivity'}">活动</router-link>
+        </span>
         <span class="headItem">
-            <router-link to="appMatching">高校匹配</router-link>
+            <router-link :to="{name:'appMatching'}">高校匹配</router-link>
         </span>
         <span class="headItem">
             <router-link to="/">问答</router-link>

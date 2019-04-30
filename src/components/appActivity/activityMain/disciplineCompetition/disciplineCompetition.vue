@@ -12,6 +12,7 @@
                 <ul class="area">
                     <li v-for="(item,index) in subjectList":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
                 </ul>
+                <div class="totalNum">共<span>{{totalNum}}</span>个结果</div>
             </div>
         </div>
         <div class="containMain contain">
@@ -22,13 +23,15 @@
             </div>
             <ul class="list">
                 <li v-for="(item,index) in activityList">
-                    <div class="sort">{{index+1}}</div>
-                    <div class="name">{{item.title}}
-                        <span class="subTitle">（{{item.subTitle}}）</span>
-                    </div>
-                    <div class="attention">
-                        <img :src="item.attentionType==1?attentioned:notAttention" alt="">
-                    </div>
+                    <router-link :to="{name:'activityDetail'}">
+                        <div class="sort">{{index+1}}</div>
+                        <div class="name">{{item.title}}
+                            <span class="subTitle">（{{item.subTitle}}）</span>
+                        </div>
+                        <div class="attention">
+                            <img :src="item.attentionType==1?attentioned:notAttention" alt="">
+                        </div>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -46,7 +49,6 @@
 </template>
 
 <script type="text/javascript">
-    import appHeader from "@/components/appHeader/appHeader";
     let self;
     export default{
         name: 'disciplineCompetition',
@@ -145,6 +147,7 @@
                 notAttention:require("img/appActivity/guanzhu_n.png"),
                 attentioned:require("img/appActivity/guanzhu.png"),
                 currentPage:1,
+                totalNum:126,
             }
         },
         methods: {
@@ -153,13 +156,16 @@
             },
             choseSubjectType(type){
                 this.subjectSelected=type;
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
             }
         },
         mounted(){
             self=this;
-        },
-        components:{
-            "app-header":appHeader,
         }
     }
 

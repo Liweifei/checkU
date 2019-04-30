@@ -1,0 +1,253 @@
+.activityDetail{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    // 公共
+    .nameCn{
+        font-size: 20PX;
+        font-weight: bold;
+        
+    }
+    .nameEn{
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    .btnGroup{
+        margin: 130px 0 0 190px;
+        
+        button{
+            float: left;
+            width: 120px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            border: 1px solid #999999;
+            font-size: 16px;
+            border-radius: 4px;
+            color: #333333;
+            background: #fff;
+
+            &+button{
+                margin-left: 20px;
+            }
+            
+            img{
+                margin-right: 10px;
+            }
+        }
+    }
+    // 公共end
+    .fixedHeader{
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        position: fixed;
+        left: 0;
+        top: 80px;
+        background: #fff;
+        z-index: 3;
+
+        .containMain{
+            padding-left: 20px;
+            .btnGroup{
+                margin: 18px 20px 0 0;
+                float: right;
+            }
+        }
+    }
+    .head{
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        background: #fff;
+        margin-top: 80px;
+
+        .containMain{
+            margin-top: 32px;
+            
+            .carousel{
+                width: 750px;
+                height: 336px;
+                float: left;
+                
+                .el-carousel, .carouselBox, .el-carousel__container{
+                    height: 100%;
+                }
+                .el-image{
+                    width: 750px;
+                    height: 336px;
+                }
+                .el-carousel__indicators .el-carousel__button {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                }
+            }
+            .right{
+                float: left;
+            
+                .name{
+                    color: #333333;
+                    margin: 72px 0 0 20px;
+                }
+            }
+        }
+    }
+    .title{
+        display: inline-block;
+        position: relative;
+        font-size: 24px;
+        color: #333333;
+        @include doubleLineTitle(60,999999,78);
+        margin: 24px 0;
+    }
+    .introduction{
+        width: 100%;
+        height: 166px;
+        background: #fff;
+        margin: 28px 0;
+        text-align: center;
+        
+        .otherInfo{
+            text-align: left;
+
+            li{
+                float: left;
+                font-size: 16px;
+                color: #333333;
+                margin-bottom: 20px;
+
+                &:nth-child(2n+1){
+                    width: 660px;
+                    padding-left: 60px;
+                    box-sizing: border-box;
+                }
+                .website{
+                    color: #49b6ea;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    .comment{
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+
+        .el-input{
+            margin-bottom: 20px;
+
+            .el-input__inner{
+                height: 44px;
+                line-height: 44px;
+                background-color: #f4f4f4;
+                border-color: #dddddd;
+            }
+        }
+        .upload{
+            float: left;
+        }
+        button{
+            width: 120px;
+            float: right;
+            @include btnSymbol($mainColorNotUnit);
+        }
+    }
+    .studentsComment{
+        width: 100%;
+        overflow-x: hidden;
+        background: #fff;
+        margin: 28px 0 18px 0;
+        text-align: center;
+
+        .commentList{
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            li{
+                float: left;
+                width: 100%;
+                text-align: left;
+                padding-bottom: 32px;
+                border-bottom: 1px solid #dddddd;
+
+                .headProtrait{
+                    float: left;
+                    @include sameWidthHeight(68);
+                    border-radius: 50%;
+                    overflow: hidden;
+                }
+                .info{
+                    float: left;
+                    width: 1074px;
+                    margin-left: 18px;
+                    font-size: 16px;
+
+                    .name{
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                    }
+                    .time{
+                        color: #999999;
+                        margin-top: 5px;
+                    }
+                    .content{
+                        margin-top: 15px;
+                        font-size: 16px;
+                    }
+                    .imgList{
+                        margin-top: 20px;
+
+                        .commemtImg{
+                            @include sameWidthHeight(160);
+                            border-radius: 4px;
+                            overflow: hidden;
+                            margin-right: 10px;
+                        }
+                    }
+                    .count{
+                        margin-top: 20px;
+                        color: #999999;
+                        font-size: 14px;
+
+                        .viewCount{
+                            float: left;
+                        }
+                        .commentNum{
+                            float: right;
+                            margin-right: 40px;
+
+                            img{
+                                float: left;
+                                margin: 2px 8px 0 0;
+                            }
+                        }
+                        .likeNum{
+                            float: right;
+                            
+                            img{
+                                float: left;
+                                margin: 2px 8px 0 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .noMore{
+        display: block;
+        width: 100%;
+        margin: 80px 0 40px 0;
+        text-align: center;
+        color: #999999;
+    }
+}

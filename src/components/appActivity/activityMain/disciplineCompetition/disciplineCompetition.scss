@@ -16,15 +16,16 @@
             font-weight: bold;
         }
         .item{
-            margin-left: 40px;
+            padding: 0 40px;
             margin-bottom: 12px;
+            box-sizing: border-box;
             
             ul{
                 display: inline-block;
                 
                 li{
                     display: inline-block;
-                    width: 68px;
+                    padding: 0 16px;
                     height: 32px;
                     line-height: 32px;
                     text-align: center;
@@ -35,6 +36,16 @@
                     border-radius: 16px;
                     background: $mainColor;
                     color: #fff;
+                }
+            }
+            .totalNum{
+                float: right;
+                height: 32px;
+                line-height: 32px;
+                font-size: 16px;
+
+                span{
+                    color: $mainColor;
                 }
             }
         }
@@ -80,6 +91,7 @@
                 position: relative;
                 color: #666666;
                 font-size: 16px;
+                cursor: pointer;
 
                 &:after{
                     content: "";
@@ -89,6 +101,9 @@
                     margin-left: -558px;
                     bottom: 0;
                     border-bottom: 1px dashed #efefef;
+                }
+                .sort{
+                    color: #666666;
                 }
                 .name{
                     font-size: 18px;

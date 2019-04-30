@@ -39,7 +39,7 @@
                     {
                         img:require("img/appActivity/hd02.png"),
                         label:"志愿服务",
-                        url:"/activityMain/disciplineCompetition"
+                        url:"/activityMain/voluntaryService"
                     },
                     {
                         img:require("img/appActivity/hd03.png"),

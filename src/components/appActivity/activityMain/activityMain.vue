@@ -36,8 +36,8 @@
                     },
                     {
                         label:"志愿服务",
-                        path:"/activityMain/disciplineCompetition/disciplineCompetition2",
-                        type:"disciplineCompetition2",
+                        path:"/activityMain/voluntaryService/voluntaryService",
+                        type:"voluntaryService",
                     },
                     {
                         label:"科研项目",
