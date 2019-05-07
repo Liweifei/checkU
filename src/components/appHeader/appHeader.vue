@@ -8,7 +8,7 @@
                 高校<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-for="(item,index) in highSchoolList" :command="item.url">{{item.label}}</el-dropdown-item>
+                <el-dropdown-item v-for="(item,index) in highSchoolList" :command="item.url" :key="index">{{item.label}}</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <!-- <el-dropdown class="schoolWork">
@@ -26,12 +26,6 @@
         </span>
         <span class="headItem">
             <router-link :to="{name:'appMatching'}">高校匹配</router-link>
-        </span>
-        <span class="headItem">
-            <router-link to="/">问答</router-link>
-        </span>
-        <span class="headItem">
-            <router-link to="/">社区</router-link>
         </span>
         <div class="headerRight">
             <i class="el-icon-search iconItem"></i>
@@ -61,16 +55,16 @@
                 headprotrait:require("img/headProtrait.png"),
                 highSchoolList:[
                     {
-                        url:"/appHighSchool",
+                        url:"/appHighSchool/universityLibrary",
                         label:"高校"
                     },
                     {
-                        url:"/",
+                        url:"/appHighSchool/listOfUniversities",
                         label:"高校榜单"
                     },
                     {
-                        url:"/",
-                        label:"专业"
+                        url:"/appHighSchool/optionalLibrary",
+                        label:"专业库"
                     },
                     {
                         url:"/",

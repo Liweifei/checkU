@@ -1,0 +1,285 @@
+.schoolInfomation{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    // 公共
+    .modelTitle{
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 28px;
+        margin-top: 22px;
+
+        &:before{
+            content: "";
+            float: left;
+            width: 14px;
+            height: 28px;
+            margin-right: 10px;
+            background: $mainColor;
+        }
+    }
+    // 公共end
+    .schoolSort{
+        margin-top: 20px;
+        
+        .carousel{
+            width: 750px;
+            height: 336px;
+            float: left;
+            
+            .el-carousel, .carouselBox, .el-carousel__container{
+                height: 100%;
+            }
+            .el-image{
+                width: 750px;
+                height: 336px;
+            }
+            .el-carousel__indicators .el-carousel__button {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+            }
+        }
+        .right{
+            width: 430px;
+            height: 336px;
+            background: #fff;
+            float: left;
+            margin-left: 20px;
+        
+            .sort{
+                padding-top: 36px;
+                
+                .usNewsBox,.worldBox,.hotBox{
+                    width: 100%;
+                    overflow: hidden;
+                }
+                .usNews,.world,.hot{
+                    float: left;
+                    width: 240px;
+                    height: 48px;
+                    line-height: 48px;
+                    margin: 0 0 30px 60px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #fff;
+                    text-align: center;
+                }
+                .usNews{
+                    @include bgCover("../../../../../assets/img/appHighSchool/xxbd_us.png");
+                }
+                .world{
+                    @include bgCover("../../../../../assets/img/appHighSchool/xxbd_sjph.png");
+                }
+                .hot{
+                    @include bgCover("../../../../../assets/img/appHighSchool/xxbd_rd.png");
+                }
+                .numBox{
+                    float: left;
+                    font-size: 14px;
+                    line-height: 55px;
+                    margin-left: 20px;
+
+                    .num{
+                        font-size: 30px;
+                    }
+                    .front{
+                        color: #da233a;
+                    }
+                }
+            }
+        }
+    }
+    .main{
+        background: #fff;
+
+        .synopsis{
+            .content{
+                padding: 15px 24px 10px 24px;
+                
+                p{
+                    font-size: 14px;
+                    line-height: 26px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px dashed #efefef;
+                }
+            }
+        }
+        .schoolInfo{
+            .main{
+                width: 1172px;
+                overflow: hidden;
+                margin: auto;
+                box-sizing: border-box;
+                margin-top: 10px;
+                padding-bottom: 20px;
+                border-bottom: 1px dashed #efefef;
+
+                .list{
+                    width: 100%;
+                    overflow: hidden;
+                    background: #f6f9f7;
+                    position: relative;
+                    margin-top: 10px;
+                    
+                    .title{
+                        float: left;
+                        width: 108px;
+                        min-height: 1px;
+                        text-indent: 24px;
+                        
+                        p{
+                            font-size: 16px;
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                    }
+                    .otherInfo1{
+                        float: left;
+                        width: 402px;
+                    }
+                    .otherInfo2{
+                        float: left;
+                        width: 662px;
+                    }
+                    .item{
+                        height: 36px;
+                        line-height: 36px;
+                        border-bottom: 1px dashed #efefef;
+
+                        .name{
+                            float: left;
+                            width: 136px;
+                            text-align: right;
+                        }
+                        .content{
+                            float: left;
+                            color: #888888;
+                            
+                            .el-rate{
+                                margin-top: 9px;
+                            }
+                        }
+                        .website{
+                            color: #49b6ea;
+                            text-decoration: underline;
+                        }
+                    }
+                    .noBorder{
+                        border-bottom: none;
+                    }
+                    .long{
+                        width: 1054px;
+
+                        .name{
+                            width: 230px;
+                        }
+                        .content{
+                            width: 824px;
+                        }
+                    }
+                }
+            }
+        }
+        .alumniComment{
+            width: 100%;
+            overflow-x: hidden;
+
+            .modelTitle{
+                margin-top: 20px;
+            }
+            .commentList{
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                padding: 0 20px;
+                margin-top: 10px;
+                box-sizing: border-box;
+    
+                li{
+                    float: left;
+                    width: 100%;
+                    text-align: left;
+                    padding-top: 20px;
+                    padding-bottom: 32px;
+                    border-bottom: 1px dashed #dddddd;
+    
+                    .headProtrait{
+                        float: left;
+                        @include sameWidthHeight(68);
+                        border-radius: 50%;
+                        overflow: hidden;
+                    }
+                    .info{
+                        float: left;
+                        width: 1074px;
+                        margin-left: 18px;
+                        font-size: 16px;
+    
+                        .name{
+                            font-size: 20px;
+                            font-weight: bold;
+                            margin-top: 10px;
+                        }
+                        .time{
+                            color: #999999;
+                            margin-top: 5px;
+                        }
+                        .content{
+                            margin-top: 15px;
+                            font-size: 16px;
+                        }
+                        .imgList{
+                            margin-top: 20px;
+    
+                            .commemtImg{
+                                @include sameWidthHeight(160);
+                                border-radius: 4px;
+                                overflow: hidden;
+                                margin-right: 10px;
+                            }
+                        }
+                        .count{
+                            margin-top: 20px;
+                            color: #999999;
+                            font-size: 14px;
+    
+                            .viewCount{
+                                float: left;
+                            }
+                            .commentNum{
+                                float: right;
+                                margin-right: 40px;
+    
+                                img{
+                                    float: left;
+                                    margin: 2px 8px 0 0;
+                                }
+                            }
+                            .likeNum{
+                                float: right;
+                                
+                                img{
+                                    float: left;
+                                    margin: 2px 8px 0 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .loadMore{
+                text-align: center;
+                color: $mainColor;
+                margin: 80px 0 40px 0;
+                
+                span{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

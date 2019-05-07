@@ -70,13 +70,13 @@
                 <h2 class="title">学生评论</h2>
                 <ul class="commentList">
                     <li v-for="(item,index) in commentList">
-                        <el-image :src="item.headProtrait" class="headProtrait"></el-image>
+                        <el-image :src="item.headProtrait" class="headProtrait" :key="index"></el-image>
                         <div class="info">
                             <h3 class="name">{{item.name}}</h3>
                             <p class="time">{{item.time}}</p>
                             <p class="content">{{item.content}}</p>
                             <div class="imgList">
-                                <el-image :src="list" class="commemtImg" v-for="list in item.imgList"></el-image>
+                                <el-image :src="list" class="commemtImg" v-for="(list,listIndex) in item.imgList" :key="listIndex"></el-image>
                             </div>
                             <div class="count">
                                 <span class="viewCount">

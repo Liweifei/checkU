@@ -17,8 +17,45 @@ export default new Router({
     },
     {
       path: '/appHighSchool',
-      name: 'appHighSchool',
-      component: () => import('@/components/appHighSchool/appHighSchool')//高校
+      component: () => import('@/components/appHighSchool/appHighSchool'),//高校
+      children:[
+        {
+          path: 'universityLibrary',//高校库
+          name: 'universityLibrary',
+          component: () => import('@/components/appHighSchool/universityLibrary/universityLibrary'),
+        },
+        {
+          path: 'listOfUniversities',//高校榜单
+          name: 'listOfUniversities',
+          component: () => import('@/components/appHighSchool/listOfUniversities/listOfUniversities'),
+        },
+        {
+          path: 'optionalLibrary',//专业库
+          name: 'optionalLibrary',
+          component: () => import('@/components/appHighSchool/optionalLibrary/optionalLibrary'),
+        },
+      ]
+    },
+    {
+      path: '/schoolDetail',
+      component: () => import('@/components/appHighSchool/universityLibrary/schoolDetail/schoolDetail'),//高校库详情
+      children:[
+        {
+          path: 'schoolInfomation',//学校资料
+          name: 'schoolInfomation',
+          component: () => import('@/components/appHighSchool/universityLibrary/schoolDetail/schoolInfomation/schoolInfomation'),
+        },
+        {
+          path: 'majorSetup',//专业设置
+          name: 'majorSetup',
+          component: () => import('@/components/appHighSchool/universityLibrary/schoolDetail/majorSetup/majorSetup'),
+        },
+        {
+          path: 'alumniComments',//校友评论
+          name: 'alumniComments',
+          component: () => import('@/components/appHighSchool/universityLibrary/schoolDetail/alumniComments/alumniComments'),
+        },
+      ]
     },
     {
       path: '/appActivity',
@@ -27,7 +64,6 @@ export default new Router({
     },
     {
       path: '/activityMain/:type',
-      name: 'activityMain',
       component: () => import('@/components/appActivity/activityMain/activityMain'),//活动内容
       children:[
         {
@@ -39,11 +75,16 @@ export default new Router({
           path: 'voluntaryService',//志愿服务
           name: 'voluntaryService',
           component: () => import('@/components/appActivity/activityMain/voluntaryService/voluntaryService'),//学科竞赛
+        },
+        {
+          path: 'scientificProject',//科研项目
+          name: 'scientificProject',
+          component: () => import('@/components/appActivity/activityMain/scientificProject/scientificProject'),//科研项目
         }
       ]
     },
     {
-      path: '/activityDetail',//详情
+      path: '/activityDetail',//活动详情
       name: 'activityDetail',
       component: () => import('@/components/appActivity/activityDetail/activityDetail'),
     }

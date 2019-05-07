@@ -49,12 +49,6 @@
                             {{item}}
                         </li>
                     </ul>
-                    <ul class="otherFunction">
-                        <li v-for="(item,index) in otherFunctionList">
-                            <img :src="item.img" alt="error">
-                            {{item.label}}
-                        </li>
-                    </ul>
                 </div>
                 <ul class="goOtherSys">
                     <li v-for="(item,index) in goOtherSysList">
@@ -180,33 +174,22 @@
                 form:{
                     name:""
                 },
-                newAnnouncementList:["U.S.News2019全美大学排名公布！","选校系统遇上大数据，选校也能智能化","暑研邮件需要注意什么呢？大概需要提到哪些…"],
-                otherFunctionList:[
-                    {
-                        label:"热门问答",
-                        img:require("img/rmwd.png")
-                    },
-                    {
-                        label:"高校匹配",
-                        img:require("img/gxpp.png")
-                    },
-                    {
-                        label:"学校点评",
-                        img:require("img/xxdp.png")
-                    }
-                ],
+                newAnnouncementList:[
+                    "U.S.News2019全美大学排名公布！",
+                    "选校系统遇上大数据，选校也能智能化",
+                    "暑研邮件需要注意什么呢？大概需要提到哪些…",
+                    "美国留学分享会",
+                    "US STAR藤校前招生官巡讲",
+                    "2019澳洲名校招生说明会",
+                    ],
                 goOtherSysList:[
                     {
                         label:"进入院校库",
-                        img:require("img/yxk.png")
-                    },
-                    {
-                        label:"计算GPA",
-                        img:require("img/GPA.png")
+                        img:require("img/yxk.jpg")
                     },
                     {
                         label:"进入择校系统",
-                        img:require("img/zxxt.png")
+                        img:require("img/zxxt.jpg")
                     }
                 ],
                 schoolList:[

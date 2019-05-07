@@ -101,7 +101,7 @@
         font-size: 24px;
         color: #333333;
         @include doubleLineTitle(60,999999,78);
-        margin: 24px 0;
+        margin: 24px 0 4px 0;
     }
     .introduction{
         width: 100%;
@@ -175,6 +175,7 @@
                 float: left;
                 width: 100%;
                 text-align: left;
+                padding-top: 20px;
                 padding-bottom: 32px;
                 border-bottom: 1px solid #dddddd;
 

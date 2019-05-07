@@ -1,0 +1,90 @@
+.schoolDetail{
+    .header{
+        width: 100%;
+        margin-top: 80px;
+        overflow: hidden;
+        background: #fff;
+
+        .contain{
+            width: 1200px;
+            margin: auto;
+
+            .school{
+                height: 58px;
+                line-height: 58px;
+                margin: 13px 0;
+
+                .el-image{
+                    width: 58px;
+                    height: 58px;
+                }
+                .nameCn{
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-left: 20px;
+                }
+                .nameEn{
+                    font-size: 16px;
+                }
+                button{
+                    float: right;
+                    width: 120px;
+                    height: 44px;
+                    line-height: 44px;
+                    margin-top: 7px;
+                    text-align: center;
+                    border: 1px solid #999;
+                    font-size: 16px;
+                    border-radius: 4px;
+                    color: #333;
+                    background: #fff;
+
+                    &+button{
+                        margin-right: 20px;
+                    }
+                    img {
+                        margin-right: 10px;
+                    }
+                }
+            }
+            .tabs{
+                float: left;
+                li{
+                    float: left;
+                    width: 120px;
+                    height: 80px;
+                    line-height: 80px;
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: bold;
+                    box-sizing: border-box;
+                    cursor: pointer;
+
+                    a{
+                        color: #333333;
+                    }
+                }
+                .selected{
+                    border-bottom: 2px solid $mainColor;
+                    a,span{
+                        color: $mainColor;
+                    }
+                }
+            }
+            .share{
+                float: right;
+                margin-top: 30px;
+                
+                .el-image{
+                    margin-right: 20px;
+                }
+                .qq{
+                    margin-left: 16px;
+                }
+            }
+        }
+    }
+    .appFooter{
+        margin-top: 48px;
+    }
+}

@@ -44,7 +44,7 @@
                     {
                         img:require("img/appActivity/hd03.png"),
                         label:"科研项目",
-                        url:"/activityMain/disciplineCompetition"
+                        url:"/activityMain/scientificProject"
                     },
                     {
                         img:require("img/appActivity/hd04.png"),

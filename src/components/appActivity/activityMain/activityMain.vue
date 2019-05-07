@@ -41,8 +41,8 @@
                     },
                     {
                         label:"科研项目",
-                        path:"/activityMain/disciplineCompetition/disciplineCompetition3",
-                        type:"disciplineCompetition3",
+                        path:"/activityMain/scientificProject/scientificProject",
+                        type:"scientificProject",
                     },
                     {
                         label:"综合能力",
