@@ -70,6 +70,9 @@
             padding-bottom: 32px;
             border-bottom: 1px dashed #dddddd;
 
+            &:last-child{
+                border-bottom: none;
+            }
             .headProtrait{
                 float: left;
                 @include sameWidthHeight(68);
@@ -85,11 +88,7 @@
                 .name{
                     font-size: 20px;
                     font-weight: bold;
-                    margin-top: 10px;
-                }
-                .description{
-                    color: #999999;
-                    margin-top: 5px;
+                    margin-top: 21px;
                 }
                 .content{
                     margin-top: 15px;
@@ -100,7 +99,16 @@
                     color: $mainColor;
                     cursor: pointer;
                     line-height: 24px;
-                    font-size: 14px;
+                    font-size: 14px;display: inline-block;
+                    overflow: hidden;
+
+                    .el-image{
+                        float: right;
+                        width: 11px;
+                        height: 6px;
+                        margin-left: 6px;
+                        margin-top: 9px;
+                    }
                 }
                 .imgList{
                     width: 1070px;

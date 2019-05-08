@@ -105,7 +105,9 @@
     }
     .introduction{
         width: 100%;
-        height: 166px;
+        // height: 166px;
+        overflow: hidden;
+        padding-bottom: 28px;
         background: #fff;
         margin: 28px 0;
         text-align: center;
@@ -124,9 +126,40 @@
                     padding-left: 60px;
                     box-sizing: border-box;
                 }
+
+                .itemName{
+                    display: inline-block;
+                    width: 98px;
+                    text-align: right;
+                }
                 .website{
                     color: #49b6ea;
                     text-decoration: underline;
+                }
+            }
+        }
+    }
+    .scientificProject{
+        height: 452px;
+        padding-bottom: 0;
+        position: relative;
+
+        ul{
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+
+            li{
+                display: block;
+                float: none !important;
+                width: auto !important;
+                padding-left: 0 !important;
+                margin-bottom: 12px !important;
+    
+                .itemName{
+                    display: inline-block;
+                    width: 180px !important;
                 }
             }
         }

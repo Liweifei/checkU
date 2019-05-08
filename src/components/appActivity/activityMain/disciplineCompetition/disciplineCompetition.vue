@@ -2,28 +2,28 @@
     <div class="disciplineCompetition">
         <div class="selectionList containMain">
             <div class="item">
-                <span class="name">地区：</span>
+                <span class="name" :class="{'en':$i18n.locale=='en'}">{{$t('disciplineCompetition.area')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in areaList" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('disciplineCompetition.areaList')" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
                 </ul>
             </div>
             <div class="item">
-                <span class="name">学科：</span>
+                <span class="name" :class="{'en':$i18n.locale=='en'}">{{$t('disciplineCompetition.subject')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in subjectList":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('disciplineCompetition.subjectList')":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
                 </ul>
-                <div class="totalNum">共<span>{{totalNum}}</span>个结果</div>
+                <div class="totalNum">{{$t('disciplineCompetition.total')}}<span>{{totalNum}}</span>{{$t('disciplineCompetition.result')}}</div>
             </div>
         </div>
         <div class="containMain contain">
             <div class="head">
-                <div class="sort">序号</div>
-                <div class="name">活动名称</div>
-                <div class="attention">关注</div>
+                <div class="sort">{{$t('disciplineCompetition.order')}}</div>
+                <div class="name">{{$t('disciplineCompetition.activityName')}}</div>
+                <div class="attention">{{$t('disciplineCompetition.attention')}}</div>
             </div>
             <ul class="list">
                 <li v-for="(item,index) in activityList">
-                    <router-link :to="{name:'activityDetail'}">
+                    <router-link :to="{name:'activityDetail',params:{type:'disciplineCompetition'}}">
                         <div class="sort">{{index+1}}</div>
                         <div class="name">{{item.title}}
                             <span class="subTitle">（{{item.subTitle}}）</span>
@@ -54,43 +54,7 @@
         name: 'disciplineCompetition',
         data(){
             return{
-                areaList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"国内",
-                        value:"inland"
-                    },
-                    {
-                        label:"国外",
-                        value:"foreign"
-                    }
-                ],
                 areaSelected:"",
-                subjectList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"数学",
-                        value:"math"
-                    },
-                    {
-                        label:"物理",
-                        value:"physics"
-                    },
-                    {
-                        label:"化学",
-                        value:"chemistry"
-                    },
-                    {
-                        label:"生物",
-                        value:"biology"
-                    }
-                ],
                 subjectSelected:"",
                 activityList:[
                     {

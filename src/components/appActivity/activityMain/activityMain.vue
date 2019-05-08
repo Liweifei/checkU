@@ -31,23 +31,23 @@
                 tabs:[
                     {
                         label:"学科竞赛",
-                        path:"/activityMain/disciplineCompetition/disciplineCompetition",
-                        type:"disciplineCompetition",
+                        path:"/activityMain/disciplineCompetition",
+                        type:"/activityMain/disciplineCompetition",
                     },
                     {
                         label:"志愿服务",
-                        path:"/activityMain/voluntaryService/voluntaryService",
-                        type:"voluntaryService",
+                        path:"/activityMain/voluntaryService",
+                        type:"/activityMain/voluntaryService",
                     },
                     {
                         label:"科研项目",
-                        path:"/activityMain/scientificProject/scientificProject",
-                        type:"scientificProject",
+                        path:"/activityMain/scientificProject",
+                        type:"/activityMain/scientificProject",
                     },
                     {
                         label:"综合能力",
-                        path:"/activityMain/disciplineCompetition/disciplineCompetition4",
-                        type:"disciplineCompetition4",
+                        path:"/activityMain/disciplineCompetition4",
+                        type:"/activityMain/disciplineCompetition4",
                     },
                 ],
                 thisRoute:null,
@@ -61,16 +61,7 @@
                 })
             },
             changeViewFromPage(){//从其它界面进入时候需要改变路由
-                self.thisRoute=self.$route.params.type;
-                let path;
-                self.tabs.forEach((item)=>{
-                    if(item.type==self.thisRoute){
-                        path=item.path;
-                    }
-                })
-                self.$router.replace({
-                    path:path,
-                })
+                self.thisRoute=self.$route.path;
             }
         },
         created(){
@@ -79,7 +70,7 @@
         },
         watch:{
             $route(){
-                if(this.$route.params.type!==this.thisRoute){
+                if(this.$route.path!==this.thisRoute){
                     this.changeViewFromPage();
                 }
             }

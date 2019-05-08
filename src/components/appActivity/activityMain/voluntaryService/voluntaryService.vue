@@ -2,28 +2,28 @@
     <div class="voluntaryService">
         <div class="selectionList containMain">
             <div class="item">
-                <span class="name">地区：</span>
+                <span class="name" :class="{'en':$i18n.locale=='en'}">{{$t('voluntaryService.area')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in areaList" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('voluntaryService.areaList')" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
                 </ul>
             </div>
-            <div class="item">
-                <span class="name">学科：</span>
+            <div class="item" :class="{'itemEn':$i18n.locale=='en'}">
+                <span class="name" :class="{'en':$i18n.locale=='en'}">{{$t('voluntaryService.subject')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in subjectList":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('voluntaryService.subjectList')":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
                 </ul>
-                <div class="totalNum">共<span>{{totalNum}}</span>个结果</div>
+                <div class="totalNum">{{$t('voluntaryService.total')}}<span>{{totalNum}}</span>{{$t('voluntaryService.result')}}</div>
             </div>
         </div>
         <div class="containMain contain">
             <div class="head">
-                <div class="sort">序号</div>
-                <div class="name">活动名称</div>
-                <div class="attention">关注</div>
+                <div class="sort">{{$t('voluntaryService.order')}}</div>
+                <div class="name">{{$t('voluntaryService.activityName')}}</div>
+                <div class="attention">{{$t('voluntaryService.attention')}}</div>
             </div>
             <ul class="list">
                 <li v-for="(item,index) in activityList">
-                    <router-link :to="{name:'activityDetail'}">
+                    <router-link :to="{name:'activityDetail',params:{type:'voluntaryService'}}">
                         <div class="sort">{{index+1}}</div>
                         <div class="name">{{item.title}}
                             <span class="subTitle">（{{item.subTitle}}）</span>
@@ -54,55 +54,7 @@
         name: 'disciplineCompetition',
         data(){
             return{
-                areaList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"国内",
-                        value:"inland"
-                    },
-                    {
-                        label:"国外",
-                        value:"foreign"
-                    }
-                ],
                 areaSelected:"",
-                subjectList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"扶贫开发",
-                        value:"PRAD"
-                    },
-                    {
-                        label:"社区建设",
-                        value:"communityBuilding"
-                    },
-                    {
-                        label:"环境保护",
-                        value:"environmentalProtection"
-                    },
-                    {
-                        label:"大型赛会",
-                        value:"largeSportGame"
-                    },
-                    {
-                        label:"应急服务",
-                        value:"emergencyService"
-                    },
-                    {
-                        label:"海外救助",
-                        value:"overseasAid"
-                    },
-                    {
-                        label:"其它",
-                        value:"other"
-                    }
-                ],
                 subjectSelected:"",
                 activityList:[
                     {

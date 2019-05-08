@@ -6,11 +6,11 @@
         <div class="headSearchBox">
             <div class="contain">
                 <ul class="tabs">
-                    <li v-for="(item,index) in tabs" :class="{'selected':item.type==thisRoute}" @click="changeView(item)">
+                    <li v-for="(item,index) in $t('appHighSchool.tabs')" :class="{'selected':item.type==thisRoute}" @click="changeView(item)">
                         <span>{{item.label}}</span>
                     </li>
                 </ul>
-                <search-input placeholder="请输入关键词"></search-input>
+                <search-input :placeholder="$t('appHighSchool.placeholder')"></search-input>
             </div>
         </div>
         <router-view></router-view>
@@ -28,33 +28,23 @@
         name: 'appHighSchool',
         data(){
             return{
-                tabs:[
-                    {
-                        label:"高校库",
-                        path:"/appHighSchool/universityLibrary",
-                        type:"/appHighSchool/universityLibrary",
-                    },
-                    {
-                        label:"高校榜单",
-                        path:"/appHighSchool/listOfUniversities",
-                        type:"/appHighSchool/listOfUniversities",
-                    },
-                    {
-                        label:"专业库",
-                        path:"/appHighSchool/optionalLibrary",
-                        type:"/appHighSchool/optionalLibrary",
-                    },
-                    {
-                        label:"点评",
-                        path:"/appHighSchool/disciplineCompetition/disciplineCompetition4",
-                        type:"disciplineCompetition4",
-                    },
-                    {
-                        label:"资讯",
-                        path:"/appHighSchool/disciplineCompetition/disciplineCompetition4",
-                        type:"disciplineCompetition4",
-                    },
-                ],
+                // tabs:[
+                //     {
+                //         label:"高校库",
+                //         path:"/appHighSchool/universityLibrary",
+                //         type:"/appHighSchool/universityLibrary",
+                //     },
+                //     {
+                //         label:"高校榜单",
+                //         path:"/appHighSchool/listOfUniversities",
+                //         type:"/appHighSchool/listOfUniversities",
+                //     },
+                //     {
+                //         label:"专业库",
+                //         path:"/appHighSchool/optionalLibrary",
+                //         type:"/appHighSchool/optionalLibrary",
+                //     }
+                // ],
                 thisRoute:null,
             }
         },
@@ -75,7 +65,7 @@
         },
         watch:{
             $route(){
-                if(this.$route.params.type!==this.thisRoute){
+                if(this.$route.path!==this.thisRoute){
                     this.changeViewFromPage();
                 }
             }

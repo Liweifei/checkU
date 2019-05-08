@@ -1,210 +1,217 @@
 <template>
     <div class="appMatching">
         <app-header not-index="true"></app-header>
-        <div class="bg">
-            <p class="nameCn">智能匹配</p>
-            <p class="nameEn">Intelligent Matching</p>
+        <div class="hint" v-show="!mainVisible">
+            <div class="bg">
+                <h1 class="title">{{$t('appMatching.title')}}</h1>
+                <h3 class="subTitle">{{$t('appMatching.subTitle')}}</h3>
+                <p class="msg" v-html="$t('appMatching.msg')"></p>
+                <button @click="mainVisible=true" :class="{'msgEn':$i18n.locale=='en'}">{{$t('appMatching.btn')}}</button>
+            </div>
         </div>
-        <div class="contain">
-            <el-steps :active="active" :space="220" align-center class="step">
-                <el-step title="必填">1</el-step>
-                <el-step title="选填">2</el-step>
-                <el-step title="匹配结果">3</el-step>
-            </el-steps>
-            <el-form ref="form" :model="form" label-width="50px" class="form" v-show="active=='1'">
-                <div class="formItem">
-                    <span class="label">
-                        <el-checkbox v-model="form.SATChecked">SAT：</el-checkbox>
-                    </span>
-                    <el-input v-model="form.SAT" placeholder="请填写您的SAT总分"></el-input>
-                </div>
-                <div class="formItem">
-                    <span class="label">
-                        <el-checkbox v-model="form.ACTChecked">ACT：</el-checkbox>
-                    </span>
-                    <el-input v-model="form.ACT" placeholder="请填写您的ACT总分"></el-input>
-                </div>
-                <el-divider></el-divider>
-                <div class="otherInfo">
-                    <div class="left">
-                        <div class="formItem">
-                            <span class="label must">TOEFL：</span>
-                            <el-input v-model="form.SAT" placeholder="请填写您的TOEFL分数"></el-input>
-                        </div>
-                        <div class="formItem" v-for="(list,index) in form.myMajorList">
-                            <span class="label must">专业{{index+1}}：</span>
-                            <el-select v-model="form.SAT" placeholder="请填写您的SAT总分">
-                                <el-option
-                                v-for="item in form.majorList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="list">
-                                </el-option>
-                            </el-select>
-                            <img :src="iconDelete" alt="" class="iconDelete" @click="delMajor(index)" v-if="index!=0">
-                        </div>
-                        <div class="addMoreOne" @click="addMajor">
-                            <img :src="add" alt="error">添加专业
-                        </div>
+        <div class="main" v-show="mainVisible">
+            <div class="bg">
+                <p class="nameCn">{{$t('appMatching.intelligentMatch')}}</p>
+                <p class="nameEn">Intelligent Matching</p>
+            </div>
+            <div class="contain">
+                <el-steps :active="active" :space="220" align-center class="step">
+                    <el-step :title="$t('appMatching.step1')">1</el-step>
+                    <el-step :title="$t('appMatching.step2')">2</el-step>
+                    <el-step :title="$t('appMatching.step3')">3</el-step>
+                </el-steps>
+                <el-form ref="form" :model="form" label-width="50px" class="form" v-show="active=='1'">
+                    <div class="formItem">
+                        <span class="label">
+                            <el-checkbox v-model="form.SATChecked">SAT：</el-checkbox>
+                        </span>
+                        <el-input v-model="form.SAT" :placeholder="$t('appMatching.placeholderSAT')"></el-input>
                     </div>
-                    <div class="right">
-                        <div class="formItem">
-                            <span class="label must">GPA：</span>
-                            <el-input v-model="form.SAT" placeholder="请填写您的GPA分数"></el-input>
-                        </div>
-                        <div class="formItem">
-                            <span class="label must">SAT2：</span>
-                            <div class="testType">
-                                <el-radio v-model="form.textType" label="1">已考试</el-radio>
-                                <el-radio v-model="form.textType" label="2">未考试</el-radio>
+                    <div class="formItem">
+                        <span class="label">
+                            <el-checkbox v-model="form.ACTChecked">ACT：</el-checkbox>
+                        </span>
+                        <el-input v-model="form.ACT" :placeholder="$t('appMatching.placeholderACT')"></el-input>
+                    </div>
+                    <el-divider></el-divider>
+                    <div class="otherInfo">
+                        <div class="left">
+                            <div class="formItem">
+                                <span class="label must">TOEFL：</span>
+                                <el-input v-model="form.SAT" :placeholder="$t('appMatching.placeholderTOEFL')"></el-input>
+                            </div>
+                            <div class="formItem" v-for="(list,index) in form.myMajorList">
+                                <span class="label must">{{$t('appMatching.majorText')}}{{index+1}}：</span>
+                                <el-select v-model="form.SAT" :placeholder="$t('appMatching.placeholderSAT')">
+                                    <el-option
+                                    v-for="item in form.majorList"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="list">
+                                    </el-option>
+                                </el-select>
+                                <img :src="iconDelete" alt="" class="iconDelete" @click="delMajor(index)" v-if="index!=0">
+                            </div>
+                            <div class="addMoreOne" @click="addMajor">
+                                <img :src="add" alt="error">{{$t('appMatching.addMajor')}}
                             </div>
                         </div>
-                        <div class="formItem testedInfoList" v-show="form.textType=='1'">
-                            <ul class="testedInfo">
-                                <li v-for="(list,index) in form.mySubjectList">
-                                    <el-select v-model="form.subject" placeholder="请选择考试科目">
-                                        <el-option
-                                        v-for="item in form.subjectList"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="list">
-                                        </el-option>
-                                    </el-select>
-                                    <el-input v-model="form.grade" placeholder="请填写分数" class="grade"></el-input>
-                                    <img :src="iconDelete" alt="" class="iconDelete" @click="delSubject(index)" v-if="index!=0">
+                        <div class="right">
+                            <div class="formItem">
+                                <span class="label must">GPA：</span>
+                                <el-input v-model="form.SAT" :placeholder="$t('appMatching.placeholderGPA')"></el-input>
+                            </div>
+                            <div class="formItem">
+                                <span class="label must">SAT2：</span>
+                                <div class="testType">
+                                    <el-radio v-model="form.textType" label="1">{{$t('appMatching.haveTest')}}</el-radio>
+                                    <el-radio v-model="form.textType" label="2">{{$t('appMatching.noTest')}}</el-radio>
+                                </div>
+                            </div>
+                            <div class="formItem testedInfoList" v-show="form.textType=='1'">
+                                <ul class="testedInfo">
+                                    <li v-for="(list,index) in form.mySubjectList">
+                                        <el-select v-model="form.subject" :placeholder="$t('appMatching.placeholderTest')">
+                                            <el-option
+                                            v-for="item in form.subjectList"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="list">
+                                            </el-option>
+                                        </el-select>
+                                        <el-input v-model="form.grade" :placeholder="$t('appMatching.placeholderGrade')" class="grade"></el-input>
+                                        <img :src="iconDelete" alt="" class="iconDelete" @click="delSubject(index)" v-if="index!=0">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="addMoreOne" @click="addSubject" v-show="form.textType=='1'">
+                                <img :src="add" alt="error">{{$t('appMatching.addSubject')}}
+                            </div>
+                        </div>
+                    </div>
+                </el-form>
+                <el-form ref="form" :model="formOptional" label-width="50px" class="form formOptional" :class="{'enFormOptional':$i18n.locale=='en'}" v-show="active=='2'">
+                    <div class="otherInfo">
+                        <div class="left">
+                            <div class="formItem">
+                                <span class="label">{{$t('appMatching.preferencesIn')}}：</span>
+                                <el-select v-model="form.preferencesIn" :placeholder="$t('appMatching.placeholder')">
+                                    <el-option
+                                    v-for="item in form.subjectList"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="formOptional.preferencesIn">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="formItem">
+                                <span class="label">{{$t('appMatching.tuitionFeeRange')}}：</span>
+                                <el-select v-model="form.tuitionFeeRange" :placeholder="$t('appMatching.placeholder')">
+                                    <el-option
+                                    v-for="item in form.subjectList"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="formOptional.scopeOfTuition">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="formItem">
+                                <span class="label">{{$t('appMatching.schoolType')}}：</span>
+                                <el-select v-model="form.schoolType" :placeholder="$t('appMatching.placeholder')">
+                                    <el-option
+                                    v-for="item in form.subjectList"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="formOptional.schoolType">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="formItem">
+                                <span class="label">{{$t('appMatching.environment')}}：</span>
+                                <el-select v-model="form.environment" :placeholder="$t('appMatching.placeholder')">
+                                    <el-option
+                                    v-for="item in form.subjectList"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="formOptional.schoolenvironment">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                        </div>
+                    </div> 
+                </el-form>
+                <div class="matchingResult" :class="{'enMatchingResult':$i18n.locale=='en'}" v-model="matchingResult" v-show="active=='3'">
+                    <div class="dreamSchool item">
+                        <div class="head">
+                            <img :src="dreamSchoolIcon" alt="">
+                            {{$t('appMatching.dreamSchool')}}
+                        </div>
+                        <div class="main">
+                            <div class="title">
+                                <span class="sort">{{$t('appMatching.order')}}</span>
+                                <span class="name">{{$t('appMatching.school')}}</span>
+                                <span class="rate">{{$t('appMatching.rate')}}</span>
+                            </div>
+                            <ul class="list">
+                                <li v-for="(item,index) in matchingResult.dreamSchool">
+                                    <span class="sort">{{index+1}}</span>
+                                    <span class="name">{{item.name}}</span>
+                                    <span class="rate">{{item.rate}}
+                                        <i class="el-icon-arrow-right"></i>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
-                        <div class="addMoreOne" @click="addSubject" v-show="form.textType=='1'">
-                            <img :src="add" alt="error">添加科目
+                    </div>
+                    <div class="matchingSchool item">
+                        <div class="head">
+                            <img :src="matchingSchoolIcon" alt="">
+                            {{$t('appMatching.matchingSchool')}}
+                        </div>
+                        <div class="main">
+                            <div class="title">
+                                <span class="sort">{{$t('appMatching.order')}}</span>
+                                <span class="name">{{$t('appMatching.school')}}</span>
+                                <span class="rate">{{$t('appMatching.rate')}}</span>
+                            </div>
+                            <ul class="list">
+                                <li v-for="(item,index) in matchingResult.matchingSchool">
+                                    <span class="sort">{{index+1}}</span>
+                                    <span class="name">{{item.name}}</span>
+                                    <span class="rate">{{item.rate}}
+                                        <i class="el-icon-arrow-right"></i>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="safeSchool item">
+                        <div class="head">
+                            <img :src="safeSchoolIcon" alt="">
+                            {{$t('appMatching.schoolSafe')}}
+                        </div>
+                        <div class="main">
+                            <div class="title">
+                                <span class="sort">{{$t('appMatching.order')}}</span>
+                                <span class="name">{{$t('appMatching.school')}}</span>
+                                <span class="rate">{{$t('appMatching.rate')}}</span>
+                            </div>
+                            <ul class="list">
+                                <li v-for="(item,index) in matchingResult.safeSchool">
+                                    <span class="sort">{{index+1}}</span>
+                                    <span class="name">{{item.name}}</span>
+                                    <span class="rate">{{item.rate}}
+                                        <i class="el-icon-arrow-right"></i>
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </el-form>
-            <el-form ref="form" :model="formOptional" label-width="50px" class="form formOptional" v-show="active=='2'">
-                <div class="otherInfo">
-                    <div class="left">
-                        <div class="formItem">
-                            <span class="label">偏好地区：</span>
-                            <el-select v-model="form.subject" placeholder="请选择">
-                                <el-option
-                                v-for="item in form.subjectList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="formOptional.preferencesIn">
-                                </el-option>
-                            </el-select>
-                        </div>
-                        <div class="formItem">
-                            <span class="label">学费范围：</span>
-                            <el-select v-model="form.subject" placeholder="请选择">
-                                <el-option
-                                v-for="item in form.subjectList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="formOptional.scopeOfTuition">
-                                </el-option>
-                            </el-select>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="formItem">
-                            <span class="label">学校类型：</span>
-                            <el-select v-model="form.subject" placeholder="请选择">
-                                <el-option
-                                v-for="item in form.subjectList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="formOptional.schoolType">
-                                </el-option>
-                            </el-select>
-                        </div>
-                        <div class="formItem">
-                            <span class="label">学校环境：</span>
-                            <el-select v-model="form.subject" placeholder="请选择">
-                                <el-option
-                                v-for="item in form.subjectList"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="formOptional.schoolenvironment">
-                                </el-option>
-                            </el-select>
-                        </div>
-                    </div>
-                </div> 
-            </el-form>
-            <div class="matchingResult" v-model="matchingResult" v-show="active=='3'">
-                <div class="dreamSchool item">
-                    <div class="head">
-                        <img :src="dreamSchoolIcon" alt="">
-                        梦想学校
-                    </div>
-                    <div class="main">
-                        <div class="title">
-                            <span class="sort">序号</span>
-                            <span class="name">学校</span>
-                            <span class="rate">匹配度</span>
-                        </div>
-                        <ul class="list">
-                            <li v-for="(item,index) in matchingResult.dreamSchool">
-                                <span class="sort">{{index+1}}</span>
-                                <span class="name">{{item.name}}</span>
-                                <span class="rate">{{item.rate}}
-                                    <i class="el-icon-arrow-right"></i>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="lookAll">查看全部</div>
-                </div>
-                <div class="matchingSchool item">
-                    <div class="head">
-                        <img :src="matchingSchoolIcon" alt="">
-                        匹配学校
-                    </div>
-                    <div class="main">
-                        <div class="title">
-                            <span class="sort">序号</span>
-                            <span class="name">学校</span>
-                            <span class="rate">匹配度</span>
-                        </div>
-                        <ul class="list">
-                            <li v-for="(item,index) in matchingResult.matchingSchool">
-                                <span class="sort">{{index+1}}</span>
-                                <span class="name">{{item.name}}</span>
-                                <span class="rate">{{item.rate}}
-                                    <i class="el-icon-arrow-right"></i>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="lookAll">查看全部</div>
-                </div>
-                <div class="safeSchool item">
-                    <div class="head">
-                        <img :src="safeSchoolIcon" alt="">
-                        安全学校
-                    </div>
-                    <div class="main">
-                        <div class="title">
-                            <span class="sort">序号</span>
-                            <span class="name">学校</span>
-                            <span class="rate">匹配度</span>
-                        </div>
-                        <ul class="list">
-                            <li v-for="(item,index) in matchingResult.safeSchool">
-                                <span class="sort">{{index+1}}</span>
-                                <span class="name">{{item.name}}</span>
-                                <span class="rate">{{item.rate}}
-                                    <i class="el-icon-arrow-right"></i>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="lookAll">查看全部</div>
-                </div>
+                <el-button class="nextStep" @click="next" v-if="active!=3">{{active=="1"?$t('appMatching.nextStep'):$t('appMatching.intelligentMatch')}}</el-button>
             </div>
-            <el-button class="nextStep" @click="next" v-if="active!=3">{{active=="1"?"下一步":"智能匹配"}}</el-button>
         </div>
     </div>
 </template>
@@ -216,6 +223,7 @@
         name: 'appMatching',
         data(){
             return{
+                mainVisible:false,
                 bg:require("img/appMatching/gxpp_bg.png"),
                 add:require("img/appMatching/add.png"),
                 dreamSchoolIcon:require("img/appMatching/mx.png"),
@@ -261,6 +269,12 @@
                     schoolType:"" ,
                     schoolenvironment :"" ,
                 },
+                // step 2
+                preferencesIn :"" ,
+                tuitionFeeRange :"" ,
+                schoolType :"" ,
+                environment :"" ,
+                // end
                 matchingResult:{
                     dreamSchool:[
                         {

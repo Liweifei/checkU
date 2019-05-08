@@ -2,28 +2,28 @@
     <div class="scientificProject">
         <div class="selectionList containMain">
             <div class="item">
-                <span class="name">地区：</span>
+                <span class="name">{{$t('scientificProject.area')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in areaList" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('scientificProject.areaList')" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
                 </ul>
             </div>
             <div class="item">
-                <span class="name">学科：</span>
+                <span class="name">{{$t('scientificProject.subject')}}：</span>
                 <ul class="area">
-                    <li v-for="(item,index) in subjectList":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
+                    <li v-for="(item,index) in $t('scientificProject.subjectList')":class="{'selected':subjectSelected==item.value}" @click="choseSubjectType(item.value)">{{item.label}}</li>
                 </ul>
-                <div class="totalNum">共<span>{{totalNum}}</span>个结果</div>
+                <div class="totalNum">{{$t('scientificProject.total')}}<span>{{totalNum}}</span>{{$t('scientificProject.result')}}</div>
             </div>
         </div>
         <div class="containMain contain">
             <div class="head">
-                <div class="sort">序号</div>
-                <div class="name">活动名称</div>
-                <div class="attention">关注</div>
+                <div class="sort">{{$t('scientificProject.order')}}</div>
+                <div class="name">{{$t('scientificProject.activityName')}}</div>
+                <div class="attention">{{$t('scientificProject.attention')}}</div>
             </div>
             <ul class="list">
                 <li v-for="(item,index) in activityList">
-                    <router-link :to="{name:'activityDetail'}">
+                    <router-link :to="{name:'activityDetail',params:{type:'scientificProject'}}">
                         <div class="sort">{{index+1}}</div>
                         <div class="name">{{item.title}}
                             <span class="subTitle">（{{item.subTitle}}）</span>
@@ -54,35 +54,8 @@
         name: 'scientificProject',
         data(){
             return{
-                areaList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"国内",
-                        value:"inland"
-                    },
-                    {
-                        label:"国外",
-                        value:"foreign"
-                    }
-                ],
                 areaSelected:"",
-                subjectList:[
-                    {
-                        label:"不限",
-                        value:""
-                    },
-                    {
-                        label:"寒假",
-                        value:"winterHoliday"
-                    },
-                    {
-                        label:"暑假",
-                        value:"summerHolidays"
-                    }
-                ],
+                
                 subjectSelected:"",
                 activityList:[
                     {

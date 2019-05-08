@@ -13,15 +13,15 @@
             <div class="searchTools">
                 <div class="searchBox">
                     <ul class="type">
-                        <li v-for="(item,index) in searchTypeList" :class="{'typeSelected':typeSelected==item.value}" @click="choseSearchType(item.value)">{{item.label}}</li>
+                        <li v-for="(item,index) in $t('appHome.searchTypeList')" :class="{'typeSelected':typeSelected==item.value}" @click="choseSearchType(item.value)">{{item.label}}</li>
                     </ul>
                     <el-form ref="form" :model="form">
                         <el-form-item>
                             <div class="searchIcon">
                                 <i class="el-icon-search"></i>
                             </div>
-                            <el-input v-model="form.name" placeholder="搜索你感兴趣的资讯"></el-input>
-                            <button type="button">搜索</button>
+                            <el-input v-model="form.name" :placeholder="$t('appHome.placeholder')"></el-input>
+                            <button type="button">{{ $t("appHome.searchBoxText")}}</button>
                         </el-form-item>
                     </el-form>
                     <div class="btnBox">
@@ -41,17 +41,17 @@
                         <span class="headIcon">
                             <i class="el-icon-bell"></i>
                         </span>
-                        最新公告
+                        {{ $t("appHome.news")}}
                     </div>
                     <ul class="list">
-                        <li v-for="(item,index) in newAnnouncementList">
+                        <li v-for="(item,index) in $t('appHome.newAnnouncementList')">
                             <span class="circle"></span>
                             {{item}}
                         </li>
                     </ul>
                 </div>
                 <ul class="goOtherSys">
-                    <li v-for="(item,index) in goOtherSysList">
+                    <li v-for="(item,index) in $t('appHome.goOtherSysList')">
                         <div class="imgBox">
                             <img :src="item.img" alt="error">
                         </div>
@@ -65,8 +65,9 @@
                     <span class="headIcon">
                         <i class="el-icon-goods"></i>
                     </span>
-                    高校社区
-                    <span class="more">更多>></span>
+                    {{ $t("appHome.highSchool")}}
+                    <span class="subTitle">{{ $t("appHome.subTitle")}}</span>
+                    <span class="more">{{ $t("appHome.more")}}</span>
                 </div>
                 <ul class="main">
                     <el-carousel :autoplay="false">
@@ -79,13 +80,12 @@
                                             <p class="nameCn wEllipsis">{{item.nameCn}}</p>
                                             <p class="nameEn wEllipsis">{{item.nameEn}}</p>
                                         </div>
-                                        <el-button size="mini">关注</el-button>
+                                        <el-button size="mini">{{ $t("appHome.attentionBtn")}}</el-button>
                                     </div>
                                     <p class="descrition">{{item.descrition}}</p>
                                     <ul class="otherInfo">
-                                        <li>参与{{item.participants}}</li>
-                                        <li>问题{{item.question}}</li>
-                                        <li>回答{{item.qa}}</li>
+                                        <li>{{ $t("appHome.join")}}{{item.participants}}</li>
+                                        <li>{{ $t("appHome.qa")}}{{item.qa}}</li>
                                     </ul>
                                 </div>
                             </li>
@@ -93,105 +93,107 @@
                     </el-carousel>
                 </ul>
             </div>
-            <!-- 热门话题 -->
-            <div class="hotTopic">
-                <div class="leftContain">
-                    <div class="moduleHead moduleHeadBorder">
-                        <span class="headIcon">
-                            <i class="el-icon-star-on"></i>
-                        </span>
-                        热门话题
-                        <span class="more">更多>></span>
-                    </div>
-                    <ul class="topicList">
-                        <li v-for="(item,index) in topicList">
-                            <h3>{{item.title}}</h3>
-                            <div class="info">
-                                <img :src="item.personImg" alt="error">
-                                <span>{{item.person}}</span>
+            <!-- 校友评论 -->
+            <div class="alumniComments">
+                <h2 class="modelTitle">{{ $t("appHome.alumniComments")}}</h2>
+                <ul class="commentList">
+                    <li v-for="(item,index) in commentList" class="commentItem">
+                        <el-image :src="item.headProtrait" class="headProtrait" :key="index"></el-image>
+                        <div class="info">
+                            <h3 class="name">{{item.name}}</h3>
+                            <p class="school">{{ $t("appHome.commentOn")}}<span>{{item.school}}</span></p>
+                            <p class="content">{{item | filterWords}}</p>
+                            <span class="showAll" v-if="item.content.length>255" @click="item.showAll=!item.showAll">{{item.showAll?"收起":"阅读全文"}}<el-image :src="item.showAll?iconShang:iconXia"></el-image></span>
+                            <div class="imgList" v-show="item.imgList.length>0">
+                                <el-carousel :autoplay="false" indicator-position="none" :arrow="item.imgList.length>1?'hover':'never'">
+                                    <el-carousel-item v-for="(listItem,listItenIndex) in item.imgList" :key="listItenIndex">
+                                        <el-image :src="list" class="commemtImg" v-for="(list,listIndex) in listItem" :key="listIndex"></el-image>
+                                    </el-carousel-item>
+                                </el-carousel>
+                            </div>
+                            <div class="count">
+                                <span class="time">
+                                    {{ $t("appHome.publishIn")}}{{item.time}}
+                                </span>
+                                <span class="viewCount">
+                                    {{ $t("appHome.viewCount")}}{{item.viewCount}}{{ $t("appHome.unit")}}
+                                </span>
+                                <span class="share">
+                                    <img :src="shareIcon" alt="">{{ $t("appHome.share")}}
+                                </span>
                                 <span class="likeNum">
-                                    <i class="el-icon-star-off"></i>{{item.likeNum}}
+                                    <img :src="item.likeType==1?likedNumIcon:likeNumIcon" alt="">
+                                    {{item.likeNum}}
                                 </span>
                                 <span class="commentNum">
-                                    <i class="el-icon-info"></i>{{item.commentNum}}
+                                    <img :src="commentNumIcon" alt="" @click="showCommentTool">
+                                    {{item.viewCount}}
                                 </span>
                             </div>
-                            <p class="content">{{item.content | wordLengthControl}}</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="rightContain">
-                    <div class="moduleHead moduleHeadBorder">
-                        <span class="headIcon">
-                            <i class="el-icon-star-on"></i>
-                        </span>
-                        <ul class="studyTypeList">
-                            <li v-for="(item,index) in studyTypeList" :class="{'studyTypeSelected':studyTypeSelected==item.value}" @click="studyTypeSelected=item.value">{{item.label}}</li>
-                        </ul>
-                    </div>
-                    <div class="content">
-                        <ul v-for="(item,index) in studyTypeContentList">
-                            <li v-for="(list,listIndex) in item.data" class="wEllipsis">
-                                <span class="circle"></span>{{list}}
-                            </li>
-                        </ul>
-                    </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="loadMore">
+                    <span>{{ $t("appHome.loadMore")}}</span>
                 </div>
             </div>
         </div>
         <!-- 底部 -->
         <app-footer></app-footer>
+        <!-- 评论工具 -->
+        <app-commentTool ref="commentTool"></app-commentTool>
     </div>
 </template>
 
 <script type="text/javascript">
     import appHeader from "@/components/appHeader/appHeader";
     import appFooter from "@/components/appFooter/appFooter";
+    import appCommentTool from "@/components/appCommentTool/appCommentTool";
     export default{
         name: 'Home',
         data(){
             return{
                 carouselList:[require("img/banner01.jpg"),require("img/banner01.jpg")],
-                searchTypeList:[
-                    {
-                        label:"全部",
-                        value:"all"
-                    },
-                    {
-                        label:"高校",
-                        value:"highSchool"
-                    },
-                    {
-                        label:"专业",
-                        value:"major"
-                    },
-                    {
-                        label:"问答",
-                        value:"qa"
-                    },
-                ],
+                // searchTypeList:[
+                //     {
+                //         label:"全部",
+                //         value:"all"
+                //     },
+                //     {
+                //         label:"高校",
+                //         value:"highSchool"
+                //     },
+                //     {
+                //         label:"专业",
+                //         value:"major"
+                //     },
+                //     {
+                //         label:"问答",
+                //         value:"qa"
+                //     },
+                // ],
                 typeSelected:"all",
                 form:{
                     name:""
                 },
-                newAnnouncementList:[
-                    "U.S.News2019全美大学排名公布！",
-                    "选校系统遇上大数据，选校也能智能化",
-                    "暑研邮件需要注意什么呢？大概需要提到哪些…",
-                    "美国留学分享会",
-                    "US STAR藤校前招生官巡讲",
-                    "2019澳洲名校招生说明会",
-                    ],
-                goOtherSysList:[
-                    {
-                        label:"进入院校库",
-                        img:require("img/yxk.jpg")
-                    },
-                    {
-                        label:"进入择校系统",
-                        img:require("img/zxxt.jpg")
-                    }
-                ],
+                // newAnnouncementList:[
+                //     "U.S.News2019全美大学排名公布！",
+                //     "选校系统遇上大数据，选校也能智能化",
+                //     "暑研邮件需要注意什么呢？大概需要提到哪些…",
+                //     "美国留学分享会",
+                //     "US STAR藤校前招生官巡讲",
+                //     "2019澳洲名校招生说明会",
+                // ],
+                // goOtherSysList:[
+                //     {
+                //         label:"进入院校库",
+                //         img:require("img/yxk.jpg")
+                //     },
+                //     {
+                //         label:"进入择校系统",
+                //         img:require("img/zxxt.jpg")
+                //     }
+                // ],
                 schoolList:[
                     {
                         nameCn:"哈佛大学",
@@ -199,7 +201,6 @@
                         followType:false,//关注
                         descrition:"私立研究型学院，共出过8位美国总统和数十位诺贝尔、普利策奖获得者，也是惠…",
                         participants:"1K+",//参与
-                        question:89,//问题
                         qa:209,//问答
                         img:require("img/xx_harvard.png"),
 
@@ -210,7 +211,6 @@
                         followType:false,//关注
                         descrition:"美国历史最悠久的五所大学之一，也是培养诺贝尔奖获得者最多的大学之一…",
                         participants:491,//参与
-                        question:76,//问题
                         qa:257,//问答
                         img:require("img/xx_Columbia.png"),
 
@@ -221,29 +221,75 @@
                         followType:false,//关注
                         descrition:"2017-18年US News全美研究生院排名工程学第一、计算机科学第一 ，与斯坦福…",
                         participants:328,//参与
-                        question:97,//问题
                         qa:224,//问答
                         img:require("img/xx_Massachusetts.png"),
-
                     },
                 ],
-                topicList:[
+                commentNumIcon:require("img/appActivity/pinglun.png"),
+                likeNumIcon:require("img/appActivity/zan_n.png"),
+                likedNumIcon:require("img/appActivity/zan.png"),
+                shareIcon:require("img/appHighSchool/share.png"),
+                iconShang:require("img/shang.png"),
+                iconXia:require("img/xia.png"),
+                commentList:[
                     {
-                        title:"赴美留学要提前准备什么？",
-                        person:"邵明",
-                        personImg:require("img/sm.jpg"),
-                        commentNum:603,//评论数
-                        likeNum:"1K",//点赞数
-                        content:"1、申请费,申请人(学生)交给学校用于审核自己申请自己材料的费用。一般来说，美国的高中、本科和研究生阶段的申请费相差不是很大，一般是从30美元到75美元不等。根据统计，中国学生一般会申请8-10所学校，这样算下来，申请费用的花费在240美元到750美元这个区间。一般来说，美国的高中、本科和研究生阶段的申请费相差不是很大，一般是从30美元到75美元不等。根据统计，中国学生一般会申请8-10所学校，这样算下来，申请费用的花费在240美元到750美元这个区间。",
+                        headProtrait:require("img/appActivity/onlyTest/imo_01.png"),
+                        name:"Marry",
+                        school:"普林斯顿大学",
+                        content:"我最喜欢普林的一点就是虽然所有的学生生活和做事都非常的driven，但并没有所谓的必须去“融入”的“主流”。学术上无论你是个码农，还是醉心理论物理，还是喜欢研究拉丁经典，还是专注于creative writing，还是研究东亚历史，还是斯拉夫文学，在校园里和别的学生谈起你所学的东西的时候，别人都会真心觉得很cool，甚至会想听你继续讲细节。而校园日常上无论是当个geek，当个橄榄球校队的主力，喜欢加入greek society常常party，还是喜欢喝下午茶纵横古今，都不会觉得是个outcast，也不会成为所有人追求的明星。简单的说就是每个人都能找到自己舒服的圈子和朋友，但同时又对别的圈子和朋友报以开放而欣赏的态度，从某种意义上说这真的有点像与世隔绝的乌托邦式的社会，因此普林也被自己的学生戏称为orange bubble。关于普林的气氛其实有各种传言，比如说这是最保守的常青藤校，有说这是非常elitist的地方，但我个人觉得其实这无非是个大家都能很舒服的找到自己想找到的位置，做自己想做的事情的地方罢了。",
+                        showAll:false,
+                        time:"2019-04-20",
+                        viewCount:"45",
+                        commentNum:"0",
+                        likeNum:"12",
+                        likeType:"0",
+                        imgList:[
+                            [
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd03.png")
+                            ],
+                            [
+                                require("img/appActivity/onlyTest/imo_01.png")
+                            ]
+                        ]
                     },
                     {
-                        title:"哪些学校在人工智能专业方向更有竞争力？",
-                        person:"Mary",
-                        personImg:require("img/ma.jpg"),
-                        commentNum:8,//评论数
-                        likeNum:"39",//点赞数
-                        content:"美国无疑是MIT最好，其次是斯坦福、卡内基梅隆、加州大学伯克利分校、华盛顿大学、德州大学奥斯丁分校、宾州大学、康奈尔等。排名是：1.东京大学2. Kyoto University 京都大学",
+                        headProtrait:require("img/appActivity/onlyTest/imo_01.png"),
+                        name:"王伟",
+                        school:"哈佛大学",
+                        content:"听说今年的试题比往年难多了，挑战啊…",
+                        showAll:false,
+                        time:"2019-04-20",
+                        viewCount:"45",
+                        commentNum:"0",
+                        likeNum:"105",
+                        likeType:"0",
+                        imgList:[
+                            [
+                                require("img/appActivity/hd01.png"),
+                                require("img/appActivity/hd03.png")
+                            ]
+                        ]
                     },
+                    {
+                        headProtrait:require("img/appActivity/onlyTest/imo_01.png"),
+                        name:"王伟",
+                        school:"普林斯顿大学",
+                        content:"有些人为什么那么优秀？为什么那么成功？而大部分人都是那么平庸，原因在那？我觉得关键的原因在于优秀的人、成功的人比平常的人多努力一点，早计划一点，也就是说善于改变自己的惰性、积极的面对人生、面对现实，他们不会那么遵循原来的本性，而是不断的向美好目标迈进；所以他们会比一般人创造更多财富，做出令一般人无法想象的成绩和效果，让人羡慕和敬仰。",
+                        showAll:false,
+                        time:"2019-04-20",
+                        viewCount:"45",
+                        commentNum:"0",
+                        likeNum:"1k+",
+                        likeType:"1",
+                        imgList:[
+
+                        ]
+                    }
                 ],
                 studyTypeList:[
                     {
@@ -283,17 +329,33 @@
                         type:"chooseMajor"
                     }
                 ],
+                commentVisible:false,
+                totalComments:[]
             }
         },
         methods: {
             choseSearchType(type){
                 this.typeSelected=type;
+            },
+            showCommentTool(){
+                this.$refs["commentTool"].show();
             }
         },
         mounted(){
             
         },
         filters:{
+            filterWords(item){
+                if(item.content.length<255 ||  item.showAll){
+                    return item.content;
+                }else{
+                    let words="";
+                    if(item.content.length>255){
+                        words=item.content.substr(0,255)+"..."
+                    }
+                    return words;
+                }
+            },
             wordLengthControl(value){
                 console.log(value.length)
                 let words=value.length>150?value.substring(0,150)+"...":value;
@@ -303,6 +365,7 @@
         components:{
             "app-header":appHeader,
             "app-footer":appFooter,
+            "app-commentTool":appCommentTool,
         }
     }
 

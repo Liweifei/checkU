@@ -15,6 +15,12 @@
             font-size: 16px;
             font-weight: bold;
         }
+        .en{
+            width: 76px;
+            white-space: nowrap;
+            text-align: right;
+            vertical-align: top;
+        }
         .item{
             padding: 0 40px;
             margin-bottom: 12px;
@@ -37,6 +43,7 @@
                     color: #fff;
                 }
             }
+            
             .totalNum{
                 float: right;
                 height: 32px;
@@ -46,6 +53,22 @@
                 span{
                     color: $mainColor;
                 }
+            }
+            
+        }
+        .itemEn{
+            position: relative;
+            ul{
+                width: 930px;
+
+                li{
+                    margin-bottom: 8px;
+                }
+            }
+            .totalNum{
+                position: absolute;
+                bottom: 8px;
+                right: 40px;
             }
         }
     }

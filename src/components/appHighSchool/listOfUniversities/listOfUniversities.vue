@@ -1,14 +1,14 @@
 <template>
     <div class="listOfUniversities">
-        <h1>高校榜单</h1>
-        <p class="introduce">基于大众点U对留学高校的理解，汇聚了学校与专业的教育评价榜</p>
+        <h1>{{$t('listOfUniversities.title')}}</h1>
+        <p class="introduce">{{$t('listOfUniversities.introduce')}}</p>
         <ul class="list">
             <li v-for="(listItem,listIndex) in list">
-                <h2 class="header">{{listItem.title}}</h2>
+                <h2 class="header">{{$t('listOfUniversities.listTitle')[listIndex]}}</h2>
                 <div class="main">
                     <div class="tabs">
-                        <div class="item" :class="{'selected':listItem.showIndex==0}" @click="listItem.showIndex=0">综合性大学</div>
-                        <div class="item" :class="{'selected':listItem.showIndex==1}" @click="listItem.showIndex=1">文理学院</div>
+                        <div class="item" :class="{'selected':listItem.showIndex==0}" @click="listItem.showIndex=0">{{$t('listOfUniversities.tabs0')}}</div>
+                        <div class="item" :class="{'selected':listItem.showIndex==1}" @click="listItem.showIndex=1">{{$t('listOfUniversities.tabs1')}}</div>
                     </div>
                     <div class="content" v-show="listItem.showIndex==0">
                         <div class="item" v-for="(item,index) in listItem.integritySchool"><span class="num" :class="{'front':index<3}">{{index+1}}</span>{{item}}</div>
@@ -16,7 +16,7 @@
                     <div class="content" v-show="listItem.showIndex==1">
                         <div class="item" v-for="(item,index) in listItem.liberalArtsCollege"><span class="num">{{index+1}}</span>{{item}}</div>
                     </div>
-                    <div class="lookAll">查看全部  ></div>
+                    <div class="lookAll">{{$t('listOfUniversities.lookAll')}}</div>
                 </div>
             </li>
         </ul>
@@ -29,9 +29,9 @@
         name: 'listOfUniversities',
         data(){
             return{
+                // listTitle:["US NEWS排行","世界排行榜","热度榜","竞争最激烈排名","录取人数排行榜单","录取率排行榜单","男女比例排行榜单","师资力量榜单","学校环境"],
                 list:[
                     {
-                        title:"US NEWS排行",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -49,7 +49,6 @@
                         ]
                     },
                     {
-                        title:"世界排行榜",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -67,7 +66,6 @@
                         ]
                     },
                     {
-                        title:"热度榜",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -85,7 +83,6 @@
                         ]
                     },
                     {
-                        title:"竞争最激烈排名",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -103,7 +100,6 @@
                         ]
                     },
                     {
-                        title:"录取人数排行榜单",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -139,7 +135,6 @@
                         ]
                     },
                     {
-                        title:"男女比例排行榜单",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -157,7 +152,6 @@
                         ]
                     },
                     {
-                        title:"师资力量榜单",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",
@@ -175,7 +169,6 @@
                         ]
                     },
                     {
-                        title:"学校环境",
                         showIndex:0,
                         integritySchool:[
                             "普林斯顿大学",

@@ -9,10 +9,10 @@
                 <span class="nameEn">（{{nameEn}}）</span>
                 <div class="btnGroup">
                     <button class="attention">
-                        <img :src="attentionType==1?attentioned:notAttention" alt="">已关注
+                        <img :src="attentionType==1?attentioned:notAttention" alt="">{{attentionType==1?$t('activityDetail.Collected'):$t('activityDetail.Collect')}}
                     </button>
                     <button class="commentIcon">
-                        <img :src="commentIcon" alt="">评论
+                        <img :src="commentIcon" alt="">{{$t('activityDetail.commentText')}}
                     </button>
                 </div>
             </div>
@@ -33,27 +33,43 @@
                     </div>
                     <div class="btnGroup">
                         <button class="attention">
-                            <img :src="attentionType==1?attentioned:notAttention" alt="">已关注
+                            <img :src="attentionType==1?attentioned:notAttention" alt="">{{attentionType==1?$t('activityDetail.Collected'):$t('activityDetail.Collect')}}
                         </button>
                         <button class="commentIcon">
-                            <img :src="commentIcon" alt="">评论
+                            <img :src="commentIcon" alt="">{{$t('activityDetail.commentText')}}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="containMain">
-            <div class="introduction">
-                <h2 class="title">活动简介</h2>
-                <ul class="otherInfo">
-                    <li>活动时间：{{ohterInfo.activityTime}}</li>
-                    <li>报名时间：{{ohterInfo.applyTime}}</li>
-                    <li>报名方式：{{ohterInfo.applyType}}</li>
-                    <li>活动官网：<a :href="ohterInfo.website" class="website">{{ohterInfo.website}}</a></li>
+            <div class="introduction" :class="{'scientificProject':$route.params.type=='scientificProject' && $i18n.locale=='en'}">
+                <h2 class="title">{{$t('activityDetail.introduction')}}</h2>
+                <ul class="otherInfo" v-if="$route.params.type=='disciplineCompetition'">
+                    <li><span class="itemName">{{$t('activityDetail.activityTime')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.applyTime')}}：</span>{{ohterInfo.applyTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.applyType')}}：</span>{{ohterInfo.applyType}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.website')}}：</span><a :href="ohterInfo.website" class="website">{{ohterInfo.website}}</a></li>
+                </ul>
+                <ul class="otherInfo" v-if="$route.params.type=='voluntaryService'">
+                    <li><span class="itemName">{{$t('activityDetail.activityTime')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.website')}}：</span><a :href="ohterInfo.website" class="website">{{ohterInfo.website}}</a></li>
+                </ul>
+                <ul class="otherInfo" v-if="$route.params.type=='scientificProject'">
+                    <li><span class="itemName">{{$t('activityDetail.address')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.PlanRecruit')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.serviceObj')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.Recruited')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.activityDate')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.jobDescription')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.releaseDate')}}：</span>{{ohterInfo.activityTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.PostConditions')}}：</span>{{ohterInfo.applyTime}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.volunteerProtection')}}：</span>{{ohterInfo.applyType}}</li>
+                    <li><span class="itemName">{{$t('activityDetail.website')}}：</span><a :href="ohterInfo.website" class="website">{{ohterInfo.website}}</a></li>
                 </ul>
             </div>
             <div class="comment">
-                <el-input placeholder="说说你对此活动的印象，分享给充满好奇心的他们吧…" v-model="comment"></el-input>
+                <el-input :placeholder="$t('activityDetail.placeholder')" v-model="comment"></el-input>
                 <el-upload
                     class="upload"
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -62,12 +78,12 @@
                     :file-list="fileList"
                     list-type="picture-card">
                     <img :src="uploadIcon" alt="" class="uploadIcon">
-                    <p class="uploadLabel">添加图片</p>
+                    <p class="uploadLabel">{{$t('activityDetail.addImgText')}}</p>
                 </el-upload>
-                <el-button>评论</el-button>
+                <el-button>{{$t('activityDetail.commentText')}}</el-button>
             </div>
             <div class="studentsComment">
-                <h2 class="title">学生评论</h2>
+                <h2 class="title">{{$t('activityDetail.studentCommentText')}}</h2>
                 <ul class="commentList">
                     <li v-for="(item,index) in commentList">
                         <el-image :src="item.headProtrait" class="headProtrait" :key="index"></el-image>
@@ -80,7 +96,7 @@
                             </div>
                             <div class="count">
                                 <span class="viewCount">
-                                    浏览了{{item.viewCount}}次
+                                    {{$t('activityDetail.viewCount')}}{{item.viewCount}}{{$t('activityDetail.unit')}}
                                 </span>
                                 <span class="likeNum">
                                     <img :src="item.likeType==1?likedNumIcon:likeNumIcon" alt="">
@@ -94,7 +110,7 @@
                         </div>
                     </li>
                 </ul>
-                <p class="noMore">没有更多了</p>
+                <p class="noMore">{{$t('activityDetail.noMore')}}</p>
             </div>
         </div>
         <!-- 底部 -->

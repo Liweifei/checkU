@@ -5,10 +5,10 @@
         </router-link>
         <el-dropdown class="highSchool" @command="openUrl">
             <span class="el-dropdown-link">
-                高校<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
+                {{ $t("appHeader.school")}}<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-for="(item,index) in highSchoolList" :command="item.url" :key="index">{{item.label}}</el-dropdown-item>
+                <el-dropdown-item v-for="(item,index) in $t('appHeader.highSchoolList')" :command="item.url" :key="index">{{item.label}}</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <!-- <el-dropdown class="schoolWork">
@@ -22,30 +22,35 @@
             </el-dropdown-menu>
         </el-dropdown> -->
         <span class="headItem schoolWork">
-            <router-link :to="{name:'appActivity'}">活动</router-link>
+            <router-link :to="{name:'appActivity'}">{{ $t("appHeader.activity")}}</router-link>
         </span>
         <span class="headItem">
-            <router-link :to="{name:'appMatching'}">高校匹配</router-link>
+            <router-link :to="{name:'appMatching'}">{{ $t("appHeader.matching")}}</router-link>
         </span>
         <div class="headerRight">
             <i class="el-icon-search iconItem"></i>
             <i class="el-icon-bell iconItem"></i>
-            <img :src="headprotrait" alt="" class="headprotrait">
+            <img :src="headprotrait" alt="" class="headprotrait" v-if="loginType">
             <el-dropdown class="schoolWork">
-                <span class="el-dropdown-link">
+                <span class="el-dropdown-link" v-if="loginType">
                     张3<i class="el-icon-arrow-down el-icon-caret-bottom"></i>
                 </span>
+                <span v-else>{{ $t("appHeader.wxLogin")}}</span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>黄金糕</el-dropdown-item>
+                    <!-- <el-dropdown-item>黄金糕</el-dropdown-item>
                     <el-dropdown-item>狮子头</el-dropdown-item>
-                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                    <el-dropdown-item>螺蛳粉</el-dropdown-item> -->
                 </el-dropdown-menu>
             </el-dropdown>
+            <div class="headItem changeLang">
+                <span @click="$i18n.locale='en'">En</span>/<span @click="$i18n.locale='zh'">中</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script type="text/javascript">
+    import {mapState} from "vuex";
 	export default{
         name: 'appHeader',
         props:["notIndex"],
@@ -53,42 +58,24 @@
 			return{
 				logo:require("img/logo.png"),
                 headprotrait:require("img/headProtrait.png"),
-                highSchoolList:[
-                    {
-                        url:"/appHighSchool/universityLibrary",
-                        label:"高校"
-                    },
-                    {
-                        url:"/appHighSchool/listOfUniversities",
-                        label:"高校榜单"
-                    },
-                    {
-                        url:"/appHighSchool/optionalLibrary",
-                        label:"专业库"
-                    },
-                    {
-                        url:"/",
-                        label:"点评"
-                    },
-                ],
-                activitityList:[
-                    {
-                        url:"/appHighSchool",
-                        label:"学科竞赛"
-                    },
-                    {
-                        url:"/",
-                        label:"志愿服务"
-                    },
-                    {
-                        url:"/",
-                        label:"科研项目"
-                    },
-                    {
-                        url:"/",
-                        label:"综合能力"
-                    },
-                ]
+                // activitityList:[
+                //     {
+                //         url:"/appHighSchool",
+                //         label:"学科竞赛"
+                //     },
+                //     {
+                //         url:"/",
+                //         label:"志愿服务"
+                //     },
+                //     {
+                //         url:"/",
+                //         label:"科研项目"
+                //     },
+                //     {
+                //         url:"/",
+                //         label:"综合能力"
+                //     },
+                // ]
 			}
 		},
         methods:{
@@ -98,7 +85,10 @@
                     path:url
                 })
             }
-        }
+        },
+        computed:mapState({
+            loginType:state=>state.userInfo.loginType
+        }),
 	}
 
 </script>

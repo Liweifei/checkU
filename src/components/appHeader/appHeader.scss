@@ -70,6 +70,14 @@
         .el-dropdown i{
             margin-left: 10px;
         }
+        .changeLang{
+            float: right;
+            margin-left: 30px;
+
+            span{
+                cursor: pointer;
+            }
+        }
     }
 }
 .notIndexBg{

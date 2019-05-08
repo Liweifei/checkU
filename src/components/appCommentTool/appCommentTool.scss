@@ -1,0 +1,187 @@
+.appCommentTool{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 4;
+    
+    .commentBox{
+        width: 830px;
+        height: 400px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -200px 0 0 -415px;
+        border-radius: 10px;
+
+        .closeBtn{
+            @include sameWidthHeight(20);
+            float: right;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .comment{
+            float: left;
+            width: 800px;
+            height: 100%;
+            overflow: hidden;
+            background: #fff;
+            padding: 30px 20px 20px 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+
+            .el-input{
+                margin-bottom: 20px;
+
+                .el-input__inner{
+                    height: 44px;
+                    line-height: 44px;
+                    background-color: #f4f4f4;
+                    border-color: #dddddd;
+                }
+            }
+            .upload{
+                float: left;
+            }
+            button{
+                width: 120px;
+                float: right;
+                @include btnSymbol($mainColorNotUnit);
+            }
+        }
+    }
+    .totalComment{
+        height: 700px;
+        margin-top: -350px;
+
+        .comment{
+            height: auto;
+            padding-bottom: 28px;
+            border-radius: 10px 10px 0 0;
+        }
+        .commentListBox{
+            width: 800px;
+            height: 418px;
+            box-sizing: border-box;
+            float: left;
+            border-top: 1px solid #dddddd;
+            background: #fff;
+            border-radius: 0 0 10px 10px;
+            overflow-x: hidden;
+            
+            .modelTitle{
+                font-size: 18px;
+                font-weight: bold;
+                line-height: 28px;
+                margin-top: 22px;
+        
+                &:before{
+                    content: "";
+                    float: left;
+                    width: 14px;
+                    height: 28px;
+                    margin-right: 10px;
+                    background: $mainColor;
+                }
+            }
+            .commentList{
+                display: block;
+                width: 800px;
+                height: 367px;
+                padding: 0 20px;
+                box-sizing: border-box;
+        
+                .commentItem{
+                    float: left;
+                    width: 760px;
+                    text-align: left;
+                    padding-top: 20px;
+                    padding-bottom: 32px;
+                    border-bottom: 1px dashed #dddddd;
+                    
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                    .headProtrait{
+                        float: left;
+                        @include sameWidthHeight(68);
+                        border-radius: 50%;
+                        overflow: hidden;
+                    }
+                    .info{
+                        float: left;
+                        width: 672px;
+                        margin-left: 18px;
+                        font-size: 16px;
+                        position: relative;
+        
+                        .name{
+                            font-size: 20px;
+                            font-weight: bold;
+                            margin-top: 10px;
+                        }
+                        .time{
+                            color: #999999;
+                            margin-top: 5px;
+                        }
+                        .likeNum{
+                            position: absolute;
+                            right: 10px;
+                            top: 20px;
+                            color: #999999;
+
+                            img{
+                                float: left;
+                                margin: 2px 8px 0 0;
+                            }
+                        }
+                        .content{
+                            margin-top: 15px;
+                            font-size: 14px;
+                            line-height: 24px;
+
+                            .isMarked{
+                                font{
+                                    color: $mainColor;
+                                }
+                            }
+                        }
+                        .imgList{
+                            width: 667px;
+                            overflow: hidden;
+                            margin-top: 20px;
+        
+                            .commemtImg{
+                                @include sameWidthHeight(160);
+                                border-radius: 4px;
+                                overflow: hidden;
+                                margin-right: 9px;
+                                float: left;
+        
+                                &:last-child{
+                                    margin-right: 0;
+                                }
+        
+                                img{
+                                    float: left;
+                                }
+                            }
+                            .carousel, .el-carousel, .el-carousel__container{
+                                height: 160px;
+                            }
+                            .el-carousel__arrow {
+                                width: 24px;
+                                height: 40px;
+                                border-radius: 0;
+                                background-color: rgba(0,0,0,.3);
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

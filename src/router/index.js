@@ -63,7 +63,7 @@ export default new Router({
       component: () => import('@/components/appActivity/appActivity'),//活动列表
     },
     {
-      path: '/activityMain/:type',
+      path: '/activityMain',
       component: () => import('@/components/appActivity/activityMain/activityMain'),//活动内容
       children:[
         {
@@ -84,7 +84,7 @@ export default new Router({
       ]
     },
     {
-      path: '/activityDetail',//活动详情
+      path: '/activityDetail/:type',//活动详情
       name: 'activityDetail',
       component: () => import('@/components/appActivity/activityDetail/activityDetail'),
     }
