@@ -15,44 +15,22 @@ import i18n from '@/assets/lang/lang.js'
 //引入vuex
 import store from './store/store.js'//注意文件路径
 
-// localStorage.setItem("checkUlang",JSON.stringify({'lang':'En'}))
-// let checkUlang=localStorage.getItem("checkUlang");
-// checkUlang=checkUlang?JSON.parse(checkUlang):{lang:"Cn"};
 
-// router.beforeEach((to, from, next) => {
-//   console.log(to.query.lang)
-//   if(!to.query.lang){
-//     next({
-//       path:to.path,
-//       query:checkUlang
-//     });
-//   }else{
-//     next()
-//   }
-  
-  // next({
-  //   path:to.path,
-  //   query:checkUlang
-  // });
-  // if (to.query.abc) {
-  //     next();
-  //     return;
-  // };
-  // if (from.query.abc) {
-  //     let toQuery = JSON.parse(JSON.stringify(to.query));
-  //     toQuery.abc = from.query.abc;
-  //     next({
-  //         path: to.path,
-  //         query: toQuery
-  //     })
-  // } else {
-  //     next()
-  // }
-
-// });
+router.beforeEach((to, from, next) => {
+  let lang=to.query.lang;
+  if(lang==="en" || lang==="zh" ){//语言切换
+    i18n.locale=lang;
+    localStorage.setItem("checkUlang",lang)
+  }
+  next()
+});
+router.afterEach((to,form,next)=>{window.scrollTo(0,0)});
 //axios
 import axios from "./tools/axiosTool"
 Vue.prototype.$http=axios;
+
+// 设置proxyTable变量，主要解决打包上线时替换回原来的（这里是针对一个服务器上面部署）
+Vue.prototype.$api = process.env.NODE_ENV === 'production' ? '' : '' 
 
 Vue.config.productionTip = false
 
@@ -62,6 +40,9 @@ new Vue({
   router,
   store,
   i18n,
+  data:{
+    eventHelper:new Vue()
+  },
   components: { App },
   template: '<App/>'
 })

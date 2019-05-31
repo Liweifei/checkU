@@ -25,8 +25,8 @@
                 <li v-for="(item,index) in activityList">
                     <router-link :to="{name:'activityDetail',params:{type:'scientificProject'}}">
                         <div class="sort">{{index+1}}</div>
-                        <div class="name">{{item.title}}
-                            <span class="subTitle">（{{item.subTitle}}）</span>
+                        <div class="name">{{$i18n.locale=='zh'?item.title:item.subTitle}}
+                            <span class="subTitle" v-if="$i18n.locale=='zh'">（{{item.subTitle}}）</span>
                         </div>
                         <div class="attention">
                             <img :src="item.attentionType==1?attentioned:notAttention" alt="">

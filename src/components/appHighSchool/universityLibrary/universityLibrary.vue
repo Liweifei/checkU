@@ -1,12 +1,12 @@
 <template>
     <div class="universityLibrary">
         <div class="selectionList containMain">
-            <div class="item">
+            <!-- <div class="item">
                 <span class="name">{{$t('universityLibrary.area')}}：</span>
                 <ul class="area" :class="{'en':$i18n.locale=='en'}">
                     <li v-for="(item,index) in $t('universityLibrary.areaList')" :class="{'selected':areaSelected==item.value}" @click="choseAreaType(item.value)">{{item.label}}</li>
                 </ul>
-            </div>
+            </div> -->
             <div class="item typeList">
                 <span class="name">{{$t('universityLibrary.type')}}：</span>
                 <ul class="area" :class="{'en':$i18n.locale=='en'}">
@@ -31,7 +31,7 @@
             </div>
             <ul class="list">
                 <li v-for="(item,index) in universityList">
-                    <router-link to="/schoolDetail/schoolInfomation">
+                    <router-link :to="{name:'schoolInfomation',query:{id:item.id,cid:item.cid,nameCn:item.title,nameEn:item.subTitle,attentionType:item.attentionType,schoolImg:item.schoolBadge}}">
                         <div class="sort">
                             <el-image :src="no1" v-if="index==0"></el-image>
                             <el-image :src="no2" v-else-if="index==1"></el-image>
@@ -42,18 +42,18 @@
                             <el-image :src="item.schoolBadge"></el-image>
                         </div>
                         <div class="name">
-                            <p class="title">{{item.title}}</p>
-                            <p class="subTitle">{{item.subTitle}}</p>
+                            <p class="title" v-if="$i18n.locale=='zh'">{{item.title}}</p>
+                            <p class="subTitle" :class="{'enSubTitle':$i18n.locale=='en'}">{{item.subTitle}}</p>
                         </div>
                         <div class="address">{{item.address}}</div>
                         <div class="collection">
-                            <img :src="item.attentionType==1?collectioned:notCollection" alt="">
+                            <img :src="!!item.attentionType?collectioned:notCollection" alt="" @click.prevent="setCollectType(item)">
                         </div>
                     </router-link>
                 </li>
             </ul>
         </div>
-        <div class="pagination">
+        <!-- <div class="pagination">
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
@@ -62,7 +62,7 @@
                 layout="prev, pager, next, jumper"
                 :total="1000">
             </el-pagination>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -72,158 +72,17 @@
         name: 'universityLibrary',
         data(){
             return{
-                // areaList:[
-                //     {
-                //         label:"全球",
-                //         value:""
-                //     },
-                //     {
-                //         label:"美国",
-                //         value:"inland"
-                //     },
-                //     {
-                //         label:"英国",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"加拿大",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"其他",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"美洲",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"欧洲",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"亚洲",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"大洋洲",
-                //         value:"foreign"
-                //     },
-                //     {
-                //         label:"非洲",
-                //         value:"foreign"
-                //     }
-                // ],
                 areaSelected:"",
-                // typeList:[
-                //     {
-                //         label:"不限",
-                //         value:""
-                //     },
-                //     {
-                //         label:"综合性大学",
-                //         value:"math"
-                //     },
-                //     {
-                //         label:"文理学院",
-                //         value:"physics"
-                //     },
-                //     {
-                //         label:"夏校",
-                //         value:"chemistry"
-                //     },
-                // ],
-                typeSelected:"",
-                // sortList:[
-                //     {
-                //         label:"推荐",
-                //         value:""
-                //     },
-                //     {
-                //         label:"热度榜",
-                //         value:"math"
-                //     },
-                //     {
-                //         label:"US NEWS榜 ",
-                //         value:"physics"
-                //     },
-                //     {
-                //         label:"世界排名榜",
-                //         value:"chemistry"
-                //     },
-                // ],
-                sortSelected:"",
+                typeSelected:"1",
+                sortSelected:"hot",
                 universityList:[
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:1,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
-                    {
-                        title:"普林斯顿大学",
-                        subTitle:"Princeton,NJ",
-                        schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
-                        address:"美国新泽西州的普林斯顿市",
-                        attentionType:0,
-                    },
+                    // {
+                    //     title:"普林斯顿大学",
+                    //     subTitle:"Princeton,NJ",
+                    //     schoolBadge:require("img/appHighSchool/onlyTest/xx_plsd.png"),
+                    //     address:"美国新泽西州的普林斯顿市",
+                    //     attentionType:0,
+                    // }
                 ],
                 no1:require("img/appHighSchool/no1.png"),
                 no2:require("img/appHighSchool/no2.png"),
@@ -231,18 +90,69 @@
                 notCollection:require("img/appActivity/guanzhu_n.png"),
                 collectioned:require("img/appActivity/guanzhu.png"),
                 currentPage:1,
-                totalNum:63,
+                totalNum:0,
             }
         },
         methods: {
+            getList(){//获取大学列表
+                self.$http.get(self.$api+'/school/getSchoolListByType', {
+                    params:{
+                        userId:self.$store.getters.getUserId,
+                        language:self.$i18n.locale,
+                        ranking:self.sortSelected,
+                        schoolType:self.typeSelected,
+                    }
+                }).then(function (response) {
+                    self.universityList=[];
+                    if(!!response){
+                        if(response.data.code=="200"){
+                            self.totalNum=response.data.data.length;
+                            response.data.data.forEach(element => {
+                                self.universityList.push({
+                                    id:element.id,
+                                    cid:element.cid,
+                                    title:element.name_zh,
+                                    subTitle:element.name_en,
+                                    schoolBadge:self.$http.serverUrl+element.image_url,
+                                    address:element.location,
+                                    attentionType:element.isCollect=="true"?true:false,
+                                })
+                            });
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            setCollectType(item){//添加或取消收藏
+                let url=!!item.attentionType?"/schoolCollect/cancelSchoolCollect":"/schoolCollect/addSchoolCollect";//已收藏则取消，反之添加
+                let param=!!item.attentionType?{
+                    collectId:item.cid
+                }:{
+                    schoolId:item.id,
+                    userId:self.$store.getters.getUserId,
+                }
+                self.$http.post(self.$api+url,param).then(function (response) {
+                    if(!!response){
+                        if(response.data.code=="200"){
+                            item.attentionType=!item.attentionType;
+                            item.cid=item.attentionType?response.data.cid:null;
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
             choseAreaType(type){
                 self.areaSelected=type;
             },
             choseType(type){
                 this.typeSelected=type;
+                self.getList();
             },
             choseSortType(type){
                 this.sortSelected=type;
+                self.getList();
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -251,8 +161,9 @@
                 console.log(`当前页: ${val}`);
             }
         },
-        mounted(){
+        created(){
             self=this;
+            self.getList();
         }
     }
 

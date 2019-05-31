@@ -1,0 +1,39 @@
+.serverError{
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .main{
+        width: 100%;
+        height: 500px;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -250px;
+        text-align: center;
+
+        .msg{
+            margin-top: 56px;
+            font-size: 20px;
+            color: #666666;
+        }
+        .back{
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 20px;
+            color: $mainColor;
+            cursor: pointer;
+        }
+        .backHome{
+            display: block;
+            margin: auto;
+            margin-top: 48px;
+            @include btnSymbol($mainColorNotUnit);
+            height: 44px;
+            line-height: 44px;
+            padding: 0 80px;
+            border-radius: 4px;
+            font-size: 20px;
+        }
+    }
+}

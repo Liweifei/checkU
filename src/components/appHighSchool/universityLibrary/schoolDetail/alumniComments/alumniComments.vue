@@ -1,19 +1,19 @@
 <template>
     <div class="alumniComments containMain">
         <div class="header">
-            共有{{totalCount}}条评论
+            {{$t('alumniComments.total')}}{{totalCount}}{{$t('alumniComments.result')}}
             <ul class="sortType">
-                <li v-for="(item,index) in sortTypeList" :class="{'selected':item.value==sortTypeSelected}" @click="changeSortType(item.value)">{{item.label}}</li>
+                <li v-for="(item,index) in $t('alumniComments.sortTypeList')" :class="{'selected':item.value==sortTypeSelected}" @click="changeSortType(item.value)">{{item.label}}</li>
             </ul>
         </div>
-        <h2 class="modelTitle">校友评论</h2>
+        <h2 class="modelTitle">{{$t('alumniComments.alumniComments')}}</h2>
         <ul class="commentList">
             <li v-for="(item,index) in commentList" class="commentItem">
                 <el-image :src="item.headProtrait" class="headProtrait" :key="index"></el-image>
                 <div class="info">
                     <h3 class="name">{{item.name}}</h3>
                     <p class="content">{{item | filterWords}}</p>
-                    <span class="showAll" v-if="item.content.length>255" @click="item.showAll=!item.showAll">{{item.showAll?"收起":"阅读全文"}}<el-image :src="item.showAll?iconShang:iconXia"></el-image></span>
+                    <span class="showAll" v-if="item.content.length>255" @click="item.showAll=!item.showAll">{{item.showAll?$t('alumniComments.Packup'):$t('alumniComments.readAll')}}<el-image :src="item.showAll?iconShang:iconXia"></el-image></span>
                     <div class="imgList" v-show="item.imgList.length>0">
                         <el-carousel :autoplay="false" indicator-position="none" :arrow="item.imgList.length>1?'hover':'never'">
                             <el-carousel-item v-for="(listItem,listItenIndex) in item.imgList" :key="listItenIndex">
@@ -23,13 +23,13 @@
                     </div>
                     <div class="count">
                         <span class="time">
-                            发表于{{item.time}}次
+                            {{$t('alumniComments.publishIn')}}{{item.time}}
                         </span>
                         <span class="viewCount">
-                            浏览了{{item.viewCount}}次
+                            {{$t('alumniComments.viewCount')}}{{item.viewCount}}次
                         </span>
                         <span class="share">
-                            <img :src="shareIcon" alt="">分享
+                            <img :src="shareIcon" alt="">{{$t('alumniComments.share')}}
                         </span>
                         <span class="likeNum">
                             <img :src="item.likeType==1?likedNumIcon:likeNumIcon" alt="">
@@ -44,7 +44,7 @@
             </li>
         </ul>
         <div class="loadMore">
-            <span>查看更多</span>
+            <span>{{$t('alumniComments.loadMore')}}</span>
         </div>
     </div>
     
@@ -57,16 +57,7 @@
         data(){
             return{
                 totalCount:210,
-                sortTypeList:[
-                    {
-                        label:"热门排序",
-                        value:"hot"
-                    },
-                    {
-                        label:"时间排序",
-                        value:"time"
-                    },
-                ],
+                
                 sortTypeSelected:"hot",
                 commentNumIcon:require("img/appActivity/pinglun.png"),
                 likeNumIcon:require("img/appActivity/zan_n.png"),

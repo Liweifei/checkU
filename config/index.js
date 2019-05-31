@@ -10,7 +10,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: process.env.NODE_ENV === 'production'
+    ?
+    {}
+    :
+    {
+      // '/api': {//配置/api意思就是相当于多加一层模拟一样，假设你本来想要访问的地址是:http://115.29.67.135:8080/login  加了这个你就应该写成http://115.29.67.135:8080/api/login
+      //   target: 'https://192.168.2.171:8443',//目标地址，也就是你要请求服务的地址
+      //   changeOrigin: true,  //是否跨域
+      //   pathRewrite: {
+      //     '^/api': ''//解析上面的/api 相当于把http://115.29.67.135:8080/api/login 解释成 http://115.29.67.135:8080/login 但是实际上网页调试的时候还是显示带api的这个是正常的
+      //   }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

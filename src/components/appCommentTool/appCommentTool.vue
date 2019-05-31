@@ -3,7 +3,7 @@
         <div class="commentBox" :class="{'totalComment':totalNum>0}">
             <el-image :src="closeIcon" class="closeBtn" @click.native="closes"></el-image>
             <div class="comment">
-                <el-input placeholder="说说你对此活动的印象，分享给充满好奇心的他们吧…" v-model="comment"></el-input>
+                <el-input :placeholder="$t('appCommentTool.placeholder')" v-model="comment"></el-input>
                 <el-upload
                     class="upload"
                     action="https://jsonplaceholder.typicode.com/posts/"
@@ -12,12 +12,12 @@
                     :file-list="fileList"
                     list-type="picture-card">
                     <img :src="uploadIcon" alt="" class="uploadIcon">
-                    <p class="uploadLabel">添加图片</p>
+                    <p class="uploadLabel">{{$t('appCommentTool.addImgText')}}</p>
                 </el-upload>
-                <el-button>评论</el-button>
+                <el-button @click="goComment">{{$t('appCommentTool.commentText')}}</el-button>
             </div>
             <div class="commentListBox" v-if="totalNum>0">
-                <h2 class="modelTitle">全部回复（{{totalNum}}）</h2>
+                <h2 class="modelTitle">{{$t('appCommentTool.totalReplyText')}}（{{totalNum}}）</h2>
                 <ul class="commentList">
                     <li v-for="(item,index) in commentList" class="commentItem">
                         <el-image :src="item.headProtrait" class="headProtrait" :key="index"></el-image>
@@ -29,7 +29,7 @@
                                 {{item.likeNum}}
                             </span>
                             <div class="content">
-                                <span class="isMarked" v-if="item.isMarked">回复<font>{{item.markUser}}</font>:</span>{{item.content}}
+                                <span class="isMarked" v-if="item.isMarked">{{$t('appCommentTool.replyText')}}<font>{{item.markUser}}</font>:</span>{{item.content}}
                             </div>
                             <div class="imgList" v-show="item.imgList.length>0">
                                 <el-carousel :autoplay="false" indicator-position="none" :arrow="item.imgList.length>1?'hover':'never'">
@@ -126,7 +126,23 @@
                 this.commentVisible=true;
             },
             closes(){
+                this.comment="";
                 this.commentVisible=false;
+            },
+            goComment(){//点击评论回调触发父组件方法
+                if(!this.comment){
+                    self.$message({
+                        message: "请填写评论内容！",
+                        type: 'warning'
+                    });
+                    return;
+                }
+                let data={
+                    msg:this.comment,
+                    img:this.fileList
+                }
+                this.$emit("comment",data)
+                this.closes();
             }
         },
         mounted(){

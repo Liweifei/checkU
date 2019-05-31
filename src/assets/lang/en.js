@@ -2,6 +2,7 @@ import enLocale from 'element-ui/lib/locale/lang/en' //引入element语言包
 const en={
   ...enLocale,//解构
   appHeader:{//头部导航
+    logo:require("img/logoEn.png"),
     school:"School",
     highSchoolList:[
       {
@@ -40,20 +41,40 @@ const en={
     searchBoxText:"Search",
     news:"News",
     newAnnouncementList:[
-      "U.s.news 2019 college rankings released!",
-      "School selection system meets big data, s…",
-      "What should heat grind mail notice? Prob…",
-      "Sharing session on study abroad in the Un…",
-      "US STAR former ivy league admission offic…",
-      "2019 Australian elite university enrollment…",
+      {
+        label:"U.s.news 2019 college rankings released!",
+        link:"http://www.sohu.com/a/252988474_372459"
+        },
+        {
+            label:"School selection system meets big data, s…",
+            link:"http://edu.sina.com.cn/a/2018-08-14/doc-ihhqtawy1049348.shtml"
+        },
+        {
+            label:"What should heat grind mail notice? Prob…",
+            link:"http://www.jyb.cn/rmtzgjyb/201903/t20190322_218943.html"
+        },
+        {
+            label:"Sharing session on study abroad in the Un…",
+            link:"https://www.jianshu.com/p/01ff2ec66f6d"
+        },
+        {
+            label:"US STAR former ivy league admission offic…",
+            link:"https://www.zhihu.com/question/68656031/answer/386135806"
+        },
+        {
+            label:"2019 Australian elite university enrollment…",
+            link:"http://edu.sina.com.cn/a/2018-08-23/doc-ihhzsnec5459989.shtml"
+        },
     ],
     goOtherSysList:[
       {
           label:"School Information",
+          link:"/appHighSchool/universityLibrary",
           img:require("img/yxk.jpg")
       },
       {
           label:"Select School",
+          link:"/appMatching",
           img:require("img/zxxt.jpg")
       }
     ],
@@ -61,6 +82,7 @@ const en={
     subTitle:"（Hot recommendation）",
     more:"view more>>",
     attentionBtn:"Collect",
+    attentionedBtn:"Collected",
     join:"Participants : ",
     qa:"Comments : ",
     alumniComments:"Hot Comments",
@@ -69,6 +91,8 @@ const en={
     viewCount:"Browse  ",
     unit:"  times",
     share:"share",
+    readAll:"Read more",
+    Packup:"Pack up",
     loadMore:"view more",
   },
   appHighSchool:{//高校
@@ -137,37 +161,41 @@ const en={
     ],
     type:"Sort",
     typeList:[
-      {
-          label:"All",
-          value:""
-      },
+    //   {
+    //       label:"All",
+    //       value:""
+    //   },
       {
           label:"University",
-          value:"math"
+          value:"0"
       },
       {
           label:"College",
-          value:"physics"
+          value:"1"
       },
       {
           label:"Summer School",
-          value:"chemistry"
+          value:"2"
       },
     ],
     sortText:"Rank",
     sortList:[
-      {
-          label:"Hot",
-          value:""
-      },
-      {
-          label:"US News ",
-          value:"physics"
-      },
-      {
-          label:"Word",
-          value:"chemistry"
-      },
+        // {
+        //     label:"Total",
+        //     value:""
+        // },
+        {
+            label:"Hot",
+            value:"hot"
+        },
+        {
+            label:"US News ",
+            value:"usnew"
+        },
+        {
+            label:"Word",
+            value:"world"
+        },
     ],
     total:"A total of",
     result:"results",
@@ -176,6 +204,128 @@ const en={
     nameText:"Name",
     address:"Location",
     collection:"Collect",
+  },
+  schoolDetail:{//院校详情
+    tabs:[
+        {
+            label:"Data",
+            path:"/schoolDetail/schoolInfomation",
+            type:"/schoolDetail/schoolInfomation",
+        },
+        {
+            label:"Majors",
+            path:"/schoolDetail/majorSetup",
+            type:"/schoolDetail/majorSetup",
+        },
+        {
+            label:"Comments",
+            path:"/schoolDetail/alumniComments",
+            type:"/schoolDetail/alumniComments",
+        }
+    ],
+    Collect:"Collect",
+    Collected:"Collected",
+    commentText:"comments",
+    share:"share by",
+  },
+  schoolInfomation:{//学校资料
+    schoolrRanking:"School Ranking",
+    usNews:"US NEWS",
+    world:"World",
+    hot:"Hot",
+    schoolProfile:"School Profile",
+    information:"Information",
+    general:"General Information",
+    sort:"Ranking",
+    tuition:"Fee",
+    type:"Category",
+    address:"Location",
+    website:"Website",
+    typePublic:"plublic",
+    typePrivate:"private",
+    teachingInformation:"Teaching Information",
+    studentStaffRatio:"Teacher/Student",
+    professionalSdvantage:"Advantage",
+    maleFemaleRatio:"Male/Female",
+    applicationInformation:"Application  Information",
+    other:"Application/Acceptance/Enrollment",
+    feedback:"Feedback by Students",
+    environment:"Environment",
+    teachership:"Faculty",
+    hardwareFacility:"Facilities",
+    activity:"Activities",
+    alumniComments:"Comments by Alumni",
+    viewCount:"Browse  ",
+    unit:"  times",
+    loadMore:"view more",
+    te:['poor','disappointment','ordinary','good','very good'],
+  },
+  majorSetup:{//专业设置
+    placeholder:"Search the major",
+    majorClassification:"Categories",
+    majorList:[
+        {
+            label:"All",
+            value:""
+        },
+                                    
+        {
+            label:"Business",
+            value:"Business"
+        },
+        {
+            label:"Engineering",
+            value:"Engineering"
+        },
+        {
+            label:"Science",
+            value:"Science"
+        },
+        {
+            label:"Social Science",
+            value:"SocialScience"
+        }
+    ],
+    ranking:"Ranking",
+    sortTypeList:[
+        {
+            label:"US NEWS",
+            value:"US"
+        },
+        {
+            label:"World",
+            value:"World"
+        }
+    ],
+    total:"There are  ",
+    result:"  Majors",
+    order:"Order",
+    major:"Majors",
+    eductionalSystme:"Length of school",
+    sortUs:"Ranking on<br/>US NEWS",
+    sortWorld:"Ranking on<br/>World",
+  },
+  alumniComments:{//校友评论
+    total:"There were",
+    result:"comments",
+    sortTypeList:[
+        {
+            label:"Hot",
+            value:"hot"
+        },
+        {
+            label:"Time",
+            value:"time"
+        },
+    ],
+    alumniComments:"Comments by Alumni",
+    publishIn:"Published in  ",
+    viewCount:"Browse  ",
+    unit:"  times",
+    share:"share",
+    readAll:"Read more",
+    Packup:"Pack up",
+    loadMore:"view more",
   },
   listOfUniversities:{//高校榜单
     title:"Lists",
@@ -247,43 +397,68 @@ const en={
       },
     ]
   },
+  activityMain:{//活动
+    placeholder:"Please enter keywords",
+    tabs:[
+        {
+            label:"Subject",
+            path:"/activityMain/disciplineCompetition",
+            type:"/activityMain/disciplineCompetition",
+        },
+        {
+            label:"Volunteer",
+            path:"/activityMain/voluntaryService",
+            type:"/activityMain/voluntaryService",
+        },
+        {
+            label:"Scientific Research",
+            path:"/activityMain/scientificProject",
+            type:"/activityMain/scientificProject",
+        },
+        {
+            label:"Comprehensive",
+            path:"/activityMain/disciplineCompetition4",
+            type:"/activityMain/disciplineCompetition4",
+        },
+    ]
+  },
   disciplineCompetition:{//学科竞赛
     area:"Region",
     areaList:[
       {
           label:"All",
-          value:""
+          value:"2"
       },
       {
           label:"Home",
-          value:"Home"
+          value:"3"
       },
       {
           label:"Overseas",
-          value:""
+          value:"4"
       }
     ],
     subject:"Subject",
     subjectList:[
       {
           label:"All",
-          value:""
+          value:"1"
       },
       {
           label:"Math",
-          value:"Math"
+          value:"2"
       },
       {
           label:"Physics",
-          value:"Physics"
+          value:"3"
       },
       {
           label:"Chemical",
-          value:"Chemical"
+          value:"4"
       },
       {
           label:"Biology",
-          value:"Biology"
+          value:"5"
       }
     ],
     total:"A total of  ",
@@ -425,6 +600,7 @@ const en={
     addMajor:"Add Major",
     majorText:"Major",
     placeholderGPA:"Fill in your GPA score",
+    placeholderMajor:"fill in your major",
     haveTest:"Exam taken",
     noTest:"Exam not taken",
     placeholderTest:"Please choose your subject",
@@ -441,8 +617,48 @@ const en={
     rate:"matched-degree",
     matchingSchool:"Matched",
     schoolSafe:"Matched Perfectly",
+    majorList:[
+        {
+            value: '10',
+            label: 'accounting'
+        }, 
+        {
+            value: '21',
+            label: 'engineering'
+        }
+    ],
+    subjectList:[
+        {
+            value: 'math',
+            label: 'math'
+        }, 
+        {
+            value: 'science',
+            label: 'science'
+        }
+    ],
     nextStep:"Next",
     intelligentMatch :"Intelligent Matching",
   },
+  appCommentTool:{//评论组件
+    placeholder:"Share your experience of this school.",
+    addImgText:"pictures",
+    commentText:"Comment",
+    totalReplyText:"All Replies",
+    replyText:"Reply",
+  },
+  notFound:{//404
+    msg:"Sorry, the page was not found.",
+    reload:"Try to refresh",
+    back:"Previous Page",
+  },
+  serverError:{//服务器 500
+    msg:"Sorry, we are having some problems with our server.",
+    back:"Previous Page",
+    backHome:"Home Page",
+  },
+  comingSoon:{//未建设页面
+    msg:"The page is under construction, so stay tuned!",
+  }
 }
 export default en;

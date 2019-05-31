@@ -6,11 +6,11 @@
         <div class="headSearchBox">
             <div class="contain">
                 <ul class="tabs">
-                    <li v-for="(item,index) in tabs" :class="{'selected':item.type==thisRoute}" @click="changeView(item)">
+                    <li v-for="(item,index) in $t('activityMain.tabs')" :class="{'selected':item.type==thisRoute,'enLi':$i18n.locale=='en'}" @click="changeView(item)">
                         <span>{{item.label}}</span>
                     </li>
                 </ul>
-                <search-input placeholder="请输入关键词"></search-input>
+                <search-input :placeholder="$t('activityMain.placeholder')"></search-input>
             </div>
         </div>
         <router-view></router-view>

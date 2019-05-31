@@ -34,164 +34,135 @@
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
-                        ]
-                    },
-                    {
-                        title:"录取率排行榜单",
-                        showIndex:0,
-                        integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
-                        ],
-                        liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ]
                     },
                     {
                         showIndex:0,
                         integritySchool:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
                         ],
                         liberalArtsCollege:[
-                            "普林斯顿大学",
-                            "哈佛大学",
-                            "哥伦比亚大学",
-                            "麻省理工大学",
-                            "芝加哥大学",
+                            
+                        ]
+                    },
+                    {
+                        showIndex:0,
+                        integritySchool:[
+                            
+                        ],
+                        liberalArtsCollege:[
+                            
                         ]
                     },
                 ]
             }
         },
         methods: {
+            getSchoolList(){//获取榜单数据
+                self.$http.get(self.$api+'/school/getSchoolListByCondition', {
+                    params:{
+                        ranking:5
+                    }
+                }).then(function (response) {
+                    self.list.forEach((item)=>{
+                        item.integritySchool=[];
+                        item.liberalArtsCollege=[];
+                    })
+                    let data=response.data;
+                    let name=self.$i18n.locale=="en"?"name_en":"name_zh";
+                    // US NEWS排行
+                    self.list[0].integritySchool.push(...(data.us_news_desc_List1.map(item=>item[name])));
+                    self.list[0].liberalArtsCollege.push(...(data.us_news_desc_List2.map(item=>item[name])));
+                    // 世界排行榜
+                    self.list[1].integritySchool.push(...(data.world_ranking_desc_List1.map(item=>item[name])));
+                    self.list[1].liberalArtsCollege.push(...(data.world_ranking_desc_List2.map(item=>item[name])));
+                    // 热度榜
+                    self.list[2].integritySchool.push(...(data.hot_desc_List1.map(item=>item[name])));
+                    self.list[2].liberalArtsCollege.push(...(data.hot_desc_List2.map(item=>item[name])));
+                    // 竞争最激烈排名
+                    self.list[3].integritySchool.push(...(data.enrolment_asc_List1.map(item=>item[name])));
+                    self.list[3].liberalArtsCollege.push(...(data.enrolment_asc_List2.map(item=>item[name])));
+                    // 录取人数排行榜单
+                    self.list[4].integritySchool.push(...(data.enrolment_number_desc_List1.map(item=>item[name])));
+                    self.list[4].liberalArtsCollege.push(...(data.enrolment_number_desc_List2.map(item=>item[name])));
+                    // 录取率排行榜单
+                    self.list[5].integritySchool.push(...(data.enrolment_desc_List1.map(item=>item[name])));
+                    self.list[5].liberalArtsCollege.push(...(data.enrolment_desc_List2.map(item=>item[name])));
+                    // 男女比例排行榜单
+                    self.list[6].integritySchool.push(...(data.male_female_ratio_desc_List1.map(item=>item[name])));
+                    self.list[6].liberalArtsCollege.push(...(data.male_female_ratio_desc_List2.map(item=>item[name])));
+                    // 师资力量榜单
+                    self.list[7].integritySchool.push(...(data.student_staff_ratio_desc_List1.map(item=>item[name])));
+                    self.list[7].liberalArtsCollege.push(...(data.student_staff_ratio_desc_List2.map(item=>item[name])));
+                    // 学校环境
+                    self.list[8].integritySchool.push(...(data.environment_desc_List1.map(item=>item[name])));
+                    self.list[8].liberalArtsCollege.push(...(data.environment_desc_List2.map(item=>item[name])));
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
         },
         created(){
             self=this;
+            self.getSchoolList();
         },
         components:{
         }

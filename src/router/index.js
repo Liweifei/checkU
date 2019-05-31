@@ -87,6 +87,25 @@ export default new Router({
       path: '/activityDetail/:type',//活动详情
       name: 'activityDetail',
       component: () => import('@/components/appActivity/activityDetail/activityDetail'),
-    }
+    },
+    {
+      path: '/404',//404错误
+      name: '404',
+      component: () => import('@/components/appDefaultPage/notFound/notFound'),
+    },
+    {
+      path: '/500',//服务器报错 500
+      name: '500',
+      component: () => import('@/components/appDefaultPage/serverError/serverError'),
+    },
+    {
+      path: '/comingSoon',//无页面 敬请期待
+      name: 'comingSoon',
+      component: () => import('@/components/appDefaultPage/comingSoon/comingSoon'),
+    },
+    {//不匹配页面跳转到此
+      path:'*',
+      redirect:{name:"comingSoon"}
+    },
   ]
 })

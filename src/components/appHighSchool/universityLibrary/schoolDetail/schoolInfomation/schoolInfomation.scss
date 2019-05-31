@@ -164,8 +164,10 @@
                             }
                         }
                         .website{
-                            color: #49b6ea;
-                            text-decoration: underline;
+                            a{
+                                color: #49b6ea;
+                                text-decoration: underline;
+                            }
                         }
                     }
                     .noBorder{
@@ -179,6 +181,43 @@
                         }
                         .content{
                             width: 824px;
+                        }
+                    }
+                    .professionalSdvantage{
+                        width: 1054px;
+
+                        .content{
+                            width: 918px;
+                        }
+                    }
+                }
+            }
+            .enMain{
+                .list{
+                    .title{
+                        width: 220px;
+                    }
+                    .otherInfo1{
+                        width: 370px;
+                    }
+                    .otherInfo2{
+                        width: 582px;
+                    }
+                    .long{
+                        width: 952px;
+
+                        .name{
+                            width: 250px;
+                        }
+                        .content{
+                            width: 702px;
+                        }
+                    }
+                    .professionalSdvantage{
+                        width: 952px;
+
+                        .content{
+                            width: 732px;
                         }
                     }
                 }

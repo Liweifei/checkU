@@ -23,19 +23,19 @@
             </div>
             <ul class="list">
                 <li v-for="(item,index) in activityList">
-                    <router-link :to="{name:'activityDetail',params:{type:'disciplineCompetition'}}">
+                    <router-link :to="{name:'activityDetail',params:{type:'disciplineCompetition'},query:{id:item.id}}">
                         <div class="sort">{{index+1}}</div>
-                        <div class="name">{{item.title}}
-                            <span class="subTitle">（{{item.subTitle}}）</span>
+                        <div class="name">{{$i18n.locale=='zh'?item.title:item.subTitle}}
+                            <span class="subTitle" v-if="$i18n.locale=='zh'">（{{item.subTitle}}）</span>
                         </div>
                         <div class="attention">
-                            <img :src="item.attentionType==1?attentioned:notAttention" alt="">
+                            <img :src="!!item.attentionType?attentioned:notAttention" alt="" @click.prevent="setCollectType(item)">
                         </div>
                     </router-link>
                 </li>
             </ul>
         </div>
-        <div class="pagination">
+        <!-- <div class="pagination">
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
@@ -44,7 +44,7 @@
                 layout="prev, pager, next, jumper"
                 :total="1000">
             </el-pagination>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -54,59 +54,19 @@
         name: 'disciplineCompetition',
         data(){
             return{
-                areaSelected:"",
-                subjectSelected:"",
+                areaSelected:"1",
+                subjectSelected:"1",
                 activityList:[
-                    {
-                        title:"国际数学奥林匹克竞赛",
-                        subTitle:"International Mathematical Olympiad",
-                        attentionType:0,
-                    },
-                    {
-                        title:"全国高中学生化学竞赛",
-                        subTitle:"Chinese Chemistry Olympiad",
-                        attentionType:0,
-                    },
-                    {
-                        title:"国际化学奥林匹克竞赛",
-                        subTitle:"International chemical olympiad",
-                        attentionType:1,
-                    },
-                    {
-                        title:"国际生物奥林匹克竞赛",
-                        subTitle:"International biological olympiad",
-                        attentionType:0,
-                    },
-                    {
-                        title:"英特尔国际科学与工程大奖赛",
-                        subTitle:"Intel ISEF",
-                        attentionType:0,
-                    },
-                    {
-                        title:"全国数学奥林匹克竞赛",
-                        subTitle:"Chinese mathematical olympiad",
-                        attentionType:1,
-                    },
-                    {
-                        title:"全国青少年信息学奥林匹克竞赛",
-                        subTitle:"National Olympiad in Informatics",
-                        attentionType:0,
-                    },
-                    {
-                        title:"全国大学生电子设计竞赛",
-                        subTitle:"全国大学生电子设计竞赛",
-                        attentionType:0,
-                    },
-                    {
-                        title:"全国中学生生物学竞赛",
-                        subTitle:"China High School Biology Olympiad",
-                        attentionType:0,
-                    },
-                    {
-                        title:"国际地理奥林匹克竞赛",
-                        subTitle:"国际地理奥林匹克竞赛",
-                        attentionType:0,
-                    },
+                    // {
+                    //     title:"全国数学奥林匹克竞赛",
+                    //     subTitle:"Chinese mathematical olympiad",
+                    //     attentionType:1,
+                    // },
+                    // {
+                    //     title:"全国青少年信息学奥林匹克竞赛",
+                    //     subTitle:"National Olympiad in Informatics",
+                    //     attentionType:0,
+                    // }
                 ],
                 notAttention:require("img/appActivity/guanzhu_n.png"),
                 attentioned:require("img/appActivity/guanzhu.png"),
@@ -115,11 +75,60 @@
             }
         },
         methods: {
+            getList(){//获取学科竞赛活动列表
+                self.$http.get(self.$api+'/activitydetails/selectActivityDetailBytime', {
+                    params:{
+                        userId:self.$store.getters.getUserId,
+                        language:self.$i18n.locale,
+                        local: self.areaSelected,
+                        subjectType: self.subjectSelected,
+                    }
+                }).then(function (response) {
+                    self.activityList=[];
+                    if(!!response){
+                        if(response.data.code=="200"){
+                            self.totalNum=response.data.data.length;
+                            response.data.data.forEach(element => {
+                                self.activityList.push({
+                                    id:element.id,
+                                    cid:element.cid,
+                                    title:element.name_zh,
+                                    subTitle:element.name_en,
+                                    attentionType:element.isCollect=="true"?true:false,
+                                })
+                            });
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            setCollectType(item){//添加或取消收藏
+                let url=!!item.attentionType?"/activityCollect/cancelActivityCollect":"/activityCollect/addActivityCollect";//已收藏则取消，反之添加
+                let param=!!item.attentionType?{
+                    collectId:item.cid
+                }:{
+                    activityId:item.id,
+                    userId:self.$store.getters.getUserId,
+                }
+                self.$http.post(self.$api+url,param).then(function (response) {
+                    if(!!response){
+                        if(response.data.code=="200"){
+                            item.attentionType=!item.attentionType;
+                            item.cid=item.attentionType?response.data.cid:null;
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
             choseAreaType(type){
                 self.areaSelected=type;
+                self.getList();
             },
             choseSubjectType(type){
                 this.subjectSelected=type;
+                self.getList();
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -128,8 +137,9 @@
                 console.log(`当前页: ${val}`);
             }
         },
-        mounted(){
+        created(){
             self=this;
+            self.getList();
         }
     }
 

@@ -3,8 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>大众点U</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>小生点U</title>
   </head>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script type="text/javascript">
+    var Ip=returnCitySN['cip']
+    localStorage.setItem('Ip', Ip)
+  </script>
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->

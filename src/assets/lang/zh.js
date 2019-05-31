@@ -3,6 +3,7 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN' //引入element语言包
 let zh={
   ...zhLocale,//解构
   appHeader:{//头部导航
+    logo:require("img/logo.png"),
     school:"高校",
     highSchoolList:[
       {
@@ -41,20 +42,40 @@ let zh={
     searchBoxText:"搜索",
     news:"最新公告",
     newAnnouncementList:[
-      "U.S.News2019全美大学排名公布！",
-      "选校系统遇上大数据，选校也能智能化",
-      "暑研邮件需要注意什么呢？大概需要提到哪些…",
-      "美国留学分享会",
-      "US STAR藤校前招生官巡讲",
-      "2019澳洲名校招生说明会",
+        {
+            label:"U.S.News2019全美大学排名公布！",
+            link:"http://www.sohu.com/a/252988474_372459"
+        },
+        {
+            label:"留学新方向：人工智能将成为热门专业",
+            link:"http://edu.sina.com.cn/a/2018-08-14/doc-ihhqtawy1049348.shtml"
+        },
+        {
+            label:"留学准备如何做“加减法”",
+            link:"http://www.jyb.cn/rmtzgjyb/201903/t20190322_218943.html"
+        },
+        {
+            label:"出国留学哪些国家的留学性价比更高",
+            link:"https://www.jianshu.com/p/01ff2ec66f6d"
+        },
+        {
+            label:"出国后，你有哪些既有认知会被打破？",
+            link:"https://www.zhihu.com/question/68656031/answer/386135806"
+        },
+        {
+            label:"出国游学市场火爆 专家提示注意四点防被骗",
+            link:"http://edu.sina.com.cn/a/2018-08-23/doc-ihhzsnec5459989.shtml"
+        },
     ],
     goOtherSysList:[
       {
           label:"进入院校库",
+          link:"/appHighSchool/universityLibrary",
           img:require("img/yxk.jpg")
       },
       {
           label:"进入择校系统",
+          link:"/appMatching",
           img:require("img/zxxt.jpg")
       }
     ],
@@ -62,6 +83,7 @@ let zh={
     subTitle:"热门高校推荐",
     more:"更多>>",
     attentionBtn:"关注",
+    attentionedBtn:"已关注",
     join:"参与",
     question:"问题",
     qa:"回答",
@@ -71,6 +93,8 @@ let zh={
     viewCount:"浏览了",
     unit:"次",
     share:"分享",
+    readAll:"阅读全文",
+    Packup:"收起",
     loadMore:"查看更多",
   },
   appHighSchool:{//高校
@@ -139,40 +163,40 @@ let zh={
     ],
     type:"类型",
     typeList:[
-      {
-          label:"不限",
-          value:""
-      },
+    //   {
+    //       label:"不限",
+    //       value:""
+    //   },
       {
           label:"综合性大学",
-          value:"math"
+          value:"0"
       },
       {
           label:"文理学院",
-          value:"physics"
+          value:"1"
       },
       {
           label:"夏校",
-          value:"chemistry"
+          value:"2"
       },
     ],
     sortText:"排序",
     sortList:[
-      {
-          label:"推荐",
-          value:""
-      },
+    //   {
+    //       label:"不限",
+    //       value:""
+    //   },
       {
           label:"热度榜",
-          value:"math"
+          value:"hot"
       },
       {
           label:"US NEWS榜 ",
-          value:"physics"
+          value:"usnew"
       },
       {
           label:"世界排名榜",
-          value:"chemistry"
+          value:"world"
       },
     ],
     total:"共",
@@ -183,9 +207,130 @@ let zh={
     address:"地址",
     collection:"收藏",
   },
+  schoolDetail:{//院校详情
+    tabs:[
+        {
+            label:"学校资料",
+            path:"/schoolDetail/schoolInfomation",
+            type:"/schoolDetail/schoolInfomation",
+        },
+        {
+            label:"专业设置",
+            path:"/schoolDetail/majorSetup",
+            type:"/schoolDetail/majorSetup",
+        },
+        {
+            label:"校友评论",
+            path:"/schoolDetail/alumniComments",
+            type:"/schoolDetail/alumniComments",
+        }
+    ],
+    Collect:"关注",
+    Collected:"已关注",
+    commentText:"评论",
+    share:"分享到",
+  },
+  schoolInfomation:{//学校资料
+    schoolrRanking:"学校排名",
+    usNews:"US NEWS排行",
+    world:"世界排行榜",
+    hot:"热度榜",
+    schoolProfile:"学校简介",
+    information:"学校信息",
+    general:"基本信息",
+    sort:"排名",
+    tuition:"学费",
+    type:"学校类型",
+    address:"地理位置",
+    website:"学校官网",
+    typePublic:"公立",
+    typePrivate:"私立",
+    teachingInformation:"教学信息",
+    studentStaffRatio:"师生比例",
+    professionalSdvantage:"优势专业",
+    maleFemaleRatio:"男女比例",
+    applicationInformation:"申请信息",
+    other:"申请人数/录取率/就读率",
+    feedback:"学生打分",
+    environment:"学校环境",
+    teachership:"师资力量",
+    hardwareFacility:"硬件设施",
+    activity:"课外活动",
+    alumniComments:"校友评论",
+    viewCount:"浏览了",
+    unit:"次",
+    loadMore:"查看更多",
+    te:['极差','失望','一般','好','非常好'],
+  },
+  majorSetup:{//专业设置
+    placeholder:"搜索专业",
+    majorClassification:"专业分类",
+    majorList:[
+        {
+            label:"不限",
+            value:""
+        },
+        {
+            label:"商科",
+            value:"Business"
+        },
+        {
+            label:"工学",
+            value:"Engineering"
+        },
+        {
+            label:"理科",
+            value:"Science"
+        },
+        {
+            label:"社会科学",
+            value:"SocialScience"
+        }
+    ],
+    ranking:"排名类型",
+    sortTypeList:[
+        {
+            label:"US NEWS榜",
+            value:"US"
+        },
+        {
+            label:"社区建设",
+            value:"World"
+        }
+    ],
+    total:"共",
+    result:"个课程",
+    order:"序号",
+    major:"专业",
+    eductionalSystme:"学制",
+    sortUs:"排名US<br/>NEWS榜",
+    sortWorld:"排名<br/>世界排名榜",
+  },
+  alumniComments:{//校友评论
+    total:"共有",
+    result:"条评论",
+    sortTypeList:[
+        {
+            label:"热门排序",
+            value:"hot"
+        },
+        {
+            label:"时间排序",
+            value:"time"
+        },
+    ],
+    alumniComments:"校友评论",
+    publishIn:"发表于",
+    viewCount:"浏览了",
+    unit:"次",
+    share:"分享",
+    readAll:"阅读全文",
+    Packup:"收起",
+    loadMore:"查看更多",
+  },
   listOfUniversities:{//高校榜单
     title:"高校榜单",
-    introduce:"基于大众点U对留学高校的理解，汇聚了学校与专业的教育评价榜",
+    introduce:"基于小生点U对留学高校的理解，汇聚了学校与专业的教育评价榜",
     listTitle:["US NEWS排行","世界排行榜","热度榜","竞争最激烈排名","录取人数排行榜单","录取率排行榜单","男女比例排行榜单","师资力量榜单","学校环境"],
     tabs0:"综合性大学",
     tabs1:"文理学院",
@@ -251,43 +396,68 @@ let zh={
       },
     ]
   },
+  activityMain:{//活动
+    placeholder:"请输入活动关键词",
+    tabs:[
+        {
+            label:"学科竞赛",
+            path:"/activityMain/disciplineCompetition",
+            type:"/activityMain/disciplineCompetition",
+        },
+        {
+            label:"志愿服务",
+            path:"/activityMain/voluntaryService",
+            type:"/activityMain/voluntaryService",
+        },
+        {
+            label:"科研项目",
+            path:"/activityMain/scientificProject",
+            type:"/activityMain/scientificProject",
+        },
+        {
+            label:"综合能力",
+            path:"/activityMain/disciplineCompetition4",
+            type:"/activityMain/disciplineCompetition4",
+        },
+    ]
+  },
   disciplineCompetition:{//学科竞赛
     area:"地区",
     areaList:[
       {
           label:"不限",
-          value:""
+          value:"1"
       },
       {
           label:"国内",
-          value:"inland"
+          value:"2"
       },
       {
           label:"国外",
-          value:"foreign"
+          value:"3"
       }
     ],
     subject:"学科",
     subjectList:[
       {
           label:"不限",
-          value:""
+          value:"1"
       },
       {
           label:"数学",
-          value:"math"
+          value:"2"
       },
       {
           label:"物理",
-          value:"physics"
+          value:"3"
       },
       {
           label:"化学",
-          value:"chemistry"
+          value:"4"
       },
       {
           label:"生物",
-          value:"biology"
+          value:"5"
       }
     ],
     total:"共",
@@ -429,6 +599,7 @@ let zh={
     addMajor:"添加专业",
     majorText:"专业",
     placeholderGPA:"请填写您的GPA分数",
+    placeholderMajor:"请填写您的专业",
     haveTest:"已考试",
     noTest:"未考试",
     placeholderTest:"请选择考试科目",
@@ -445,8 +616,49 @@ let zh={
     rate:"匹配度",
     matchingSchool:"匹配学校",
     schoolSafe:"安全学校",
+    majorList:[
+        {
+            value: '10',
+            label: '会计类'
+        }, 
+        {
+            value: '21',
+            label: '工程类'
+        }
+    ],
+    subjectList:[
+        {
+            value: 'math',
+            label: '数学'
+        }, 
+        {
+            value: 'science',
+            label: '科学'
+        }
+    ],
     nextStep:"下一步",
     intelligentMatch :"智能匹配",
   },
+  appCommentTool:{//评论组件
+    placeholder:"说说你对此活动的印象，分享给充满好奇心的他们吧…",
+    addImgText:"添加图片",
+    commentText:"评论",
+    totalReplyText:"全部回复",
+    replyText:"回复",
+  },
+  notFound:{//404
+    msg:"抱歉页面找不到了",
+    reload:"刷新试试",
+    back:"返回",
+  },
+  serverError:{//服务器500
+    msg:"抱歉，我们的服务器遇到了一些问题",
+    back:"返回上一步",
+    backHome:"返回首页",
+  },
+  comingSoon:{//未建设页面
+    msg:"该页面正在建设中，敬请期待！",
+    reload:"返回上一步",
+  }
 }
 export default zh;

@@ -38,16 +38,16 @@
                         <div class="left">
                             <div class="formItem">
                                 <span class="label must">TOEFL：</span>
-                                <el-input v-model="form.SAT" :placeholder="$t('appMatching.placeholderTOEFL')"></el-input>
+                                <el-input v-model="form.TOEFL" :placeholder="$t('appMatching.placeholderTOEFL')"></el-input>
                             </div>
                             <div class="formItem" v-for="(list,index) in form.myMajorList">
                                 <span class="label must">{{$t('appMatching.majorText')}}{{index+1}}：</span>
-                                <el-select v-model="form.SAT" :placeholder="$t('appMatching.placeholderSAT')">
+                                <el-select v-model="form.myMajorList[index]" :placeholder="$t('appMatching.placeholderMajor')">
                                     <el-option
-                                    v-for="item in form.majorList"
+                                    v-for="item in $t('appMatching.majorList')"
                                     :key="item.value"
                                     :label="item.label"
-                                    :value="list">
+                                    :value="item.value">
                                     </el-option>
                                 </el-select>
                                 <img :src="iconDelete" alt="" class="iconDelete" @click="delMajor(index)" v-if="index!=0">
@@ -59,7 +59,7 @@
                         <div class="right">
                             <div class="formItem">
                                 <span class="label must">GPA：</span>
-                                <el-input v-model="form.SAT" :placeholder="$t('appMatching.placeholderGPA')"></el-input>
+                                <el-input v-model="form.GPA" :placeholder="$t('appMatching.placeholderGPA')"></el-input>
                             </div>
                             <div class="formItem">
                                 <span class="label must">SAT2：</span>
@@ -71,15 +71,15 @@
                             <div class="formItem testedInfoList" v-show="form.textType=='1'">
                                 <ul class="testedInfo">
                                     <li v-for="(list,index) in form.mySubjectList">
-                                        <el-select v-model="form.subject" :placeholder="$t('appMatching.placeholderTest')">
+                                        <el-select v-model="form.mySubjectList[index].select" :placeholder="$t('appMatching.placeholderTest')">
                                             <el-option
-                                            v-for="item in form.subjectList"
+                                            v-for="item in $t('appMatching.subjectList')"
                                             :key="item.value"
                                             :label="item.label"
-                                            :value="list">
+                                            :value="item.value">
                                             </el-option>
                                         </el-select>
-                                        <el-input v-model="form.grade" :placeholder="$t('appMatching.placeholderGrade')" class="grade"></el-input>
+                                        <el-input v-model="form.mySubjectList[index].score" :placeholder="$t('appMatching.placeholderGrade')" class="grade"></el-input>
                                         <img :src="iconDelete" alt="" class="iconDelete" @click="delSubject(index)" v-if="index!=0">
                                     </li>
                                 </ul>
@@ -231,36 +231,19 @@
                 safeSchoolIcon:require("img/appMatching/aq.png"),
                 iconDelete:require("img/appMatching/delete.png"),
                 active:1,
+                regNumber:/^[0-9]*$/,
                 form: {
                     SAT: '',
                     SATChecked: '',
                     ACT: '',
                     ACTChecked: '',
-                    majorList:[
-                        {
-                            value: '选项4',
-                            label: '龙须面'
-                        }, 
-                        {
-                            value: '选项5',
-                            label: '北京烤鸭'
-                        }
-                    ],
+                    TOEFL: '',
+                    GPA: '',
                     myMajorList:[null],
                     radio:'',
                     textType:"",
                     subject:"",
-                    subjectList:[
-                        {
-                            value: '选项4',
-                            label: '龙须面'
-                        }, 
-                        {
-                            value: '选项5',
-                            label: '北京烤鸭'
-                        }
-                    ],
-                    mySubjectList:[null],
+                    mySubjectList:[{select:null,score:null}],
                     grade:""
                 },
                 formOptional:{
@@ -277,70 +260,22 @@
                 // end
                 matchingResult:{
                     dreamSchool:[
-                        {
-                            name:"普林斯顿大学",
-                            rate:"10.5%"
-                        },
-                        {
-                            name:"哈佛大学",
-                            rate:"9.1%"
-                        },
-                        {
-                            name:"哥伦比亚大学",
-                            rate:"8.8%"
-                        },
-                        {
-                            name:"芝加哥大学",
-                            rate:"7.5%"
-                        },
-                        {
-                            name:"耶鲁大学",
-                            rate:"7.4%"
-                        },
+                        // {
+                        //     name:"普林斯顿大学",
+                        //     rate:"10.5%"
+                        // }
                     ],
                     matchingSchool:[
-                        {
-                            name:"墨尔本大学",
-                            rate:"99.9%"
-                        },
-                        {
-                            name:"海德堡大学",
-                            rate:"99.8%"
-                        },
-                        {
-                            name:"科罗拉多大学",
-                            rate:"96.2%"
-                        },
-                        {
-                            name:"马里兰大学",
-                            rate:"93.8%"
-                        },
-                        {
-                            name:"加州大学",
-                            rate:"89.9%"
-                        }
+                        // {
+                        //     name:"墨尔本大学",
+                        //     rate:"99.9%"
+                        // }
                     ],
                     safeSchool:[
-                        {
-                            name:"麻省理工大学",
-                            rate:"100%"
-                        },
-                        {
-                            name:"南加州大学",
-                            rate:"100%"
-                        },
-                        {
-                            name:"密歇根大学",
-                            rate:"100%"
-                        },
-                        {
-                            name:"剑桥大学",
-                            rate:"100%"
-                        },
-                        {
-                            name:"威斯康星大学",
-                            rate:"100%"
-                        }
+                        // {
+                        //     name:"麻省理工大学",
+                        //     rate:"100%"
+                        // }
                     ],
                 }
             }
@@ -348,21 +283,176 @@
         methods: {
             addMajor(){//添加专业
                 self.form.myMajorList.push(null);
+                console.log(self.form.myMajorList)
             },
             delMajor(index){//删除专业
                 self.form.myMajorList.splice(index,1);
             },
             addSubject(){//添加科目
-                self.form.mySubjectList.push(null);
+                self.form.mySubjectList.push({select:null,score:null});
             },
             delSubject(index){//删除科目
                 self.form.mySubjectList.splice(index,1);
             },
+            checkMust(){//验证必填项
+                if(self.form.SATChecked && !self.form.SAT){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please fill in your SAT score":"请填写您的SAT总分",
+                        type: 'warning'
+                    });
+                    return false;
+                }else{
+                    if(!self.regNumber.test(self.form.SAT)){
+                        self.$message({
+                            message: self.$i18n.locale=="en"?"Please fill in your numerical SAT score":"请填写数字类型的SAT总分",
+                            type: 'warning'
+                        });
+                        return false;
+                    }
+                }
+                if(self.form.ACTChecked && !self.form.ACT){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please fill in your ACT score":"请填写您的ACT总分",
+                        type: 'warning'
+                    });
+                    return false;
+                }else{
+                    if(!self.regNumber.test(self.form.ACT)){
+                        self.$message({
+                            message: self.$i18n.locale=="en"?"Please fill in the numerical ACT total score":"请填写数字类型的ACT总分",
+                            type: 'warning'
+                        });
+                        return false;
+                    }
+                }
+                if(!self.form.TOEFL){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please fill in your TOEFL score":"请填写您的TOEFL分数",
+                        type: 'warning'
+                    });
+                    return false;
+                }else{
+                    if(!self.regNumber.test(self.form.TOEFL)){
+                        self.$message({
+                            message: self.$i18n.locale=="en"?"Please fill in the numerical TOEFL score":"请填写数字类型的TOEFL分数",
+                            type: 'warning'
+                        });
+                        return false;
+                    }
+                }
+                if(!self.form.GPA){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please fill in your GPA score":"请填写您的GPA分数",
+                        type: 'warning'
+                    });
+                    return false;
+                }else{
+                    if(!self.regNumber.test(self.form.GPA)){
+                        self.$message({
+                            message: self.$i18n.locale=="en"?"Please fill in your numerical GPA":"请填写数字类型的GPA分数",
+                            type: 'warning'
+                        });
+                        return false;
+                    }
+                }
+                let myMajorListIo=true;
+                self.form.myMajorList.forEach(element => {
+                    console.log(element)
+                    if(!element){
+                        myMajorListIo=false;
+                        return;
+                    }
+                });
+                if(!myMajorListIo){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please fill in your major":"请填写您的专业",
+                        type: 'warning'
+                    });
+                    return false;
+                }
+                if(!self.form.textType){
+                    self.$message({
+                        message: self.$i18n.locale=="en"?"Please choose your SAT2":"请选择SAT2",
+                        type: 'warning'
+                    });
+                    return false;
+                }else if(self.form.textType=="1"){
+                    let mySubjectListIo=true;
+                    let msg="";
+                    self.form.mySubjectList.forEach(element => {
+                        if(!element.select){
+                            mySubjectListIo=false;
+                            msg=self.$i18n.locale=="en"?"Please choose your subject":"请选择考试科目";
+                            return;
+                        }else if(!element.score){
+                            mySubjectListIo=false;
+                            msg=self.$i18n.locale=="en"?"Please fill in the test subject score":"请填写考试科目分数";
+                            return;
+                        }else{
+                            if(!self.regNumber.test(element.score)){
+                                mySubjectListIo=false;
+                                msg=self.$i18n.locale=="en"?"Please fill in the numerical subject score":"请填写数字类型的科目分数";
+                                return;
+                            }
+                        }
+                    });
+                    if(!mySubjectListIo){
+                        self.$message({
+                            message: msg,
+                            type: 'warning'
+                        });
+                        return false;
+                    }
+                }
+                return true;
+            },
             next() {//下一步
-                if (self.active < 3) self.active++;
-            }
+                if(self.active==1){
+                    if(!self.checkMust())return;
+                }
+                if(self.active==2){
+                    self.getMatching().then(()=>{
+                        self.active++;
+                    });
+                }else{
+                    self.active++;
+                }
+            },
+            getMatching(){//智能匹配
+                return new Promise((resolve,reject)=>{
+                    self.$http.get(self.$api+'/school/getMatching', {
+                        params:{
+                            language:self.$i18n.locale,
+                            act:self.form.ACT?self.form.ACT:1,
+                            sat:self.form.SAT?self.form.SAT:1,
+                            toefl:self.form.TOEFL,
+                        }
+                    }).then(function (response) {
+                        if(!!response){
+                            if(response.data.code=="200"){
+                                self.matchingResult.dreamSchool=[];
+                                self.matchingResult.matchingSchool=[];
+                                self.matchingResult.safeSchool=[];
+                                let res=response.data.data;
+                                self.matchingResult.dreamSchool=res.getMatchDream.map((item)=>{
+                                    return {name:item.name,rate:"100%"}
+                                })
+                                self.matchingResult.matchingSchool=res.getMatching.map((item)=>{
+                                    return {name:item.name,rate:"100%"}
+                                })
+                                self.matchingResult.safeSchool=res.getMatchSafe.map((item)=>{
+                                    return {name:item.name,rate:"100%"}
+                                })
+                                resolve();
+                            }
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                })
+            },
         },
-        mounted(){
+        created(){
             self=this;
         },
         components:{
