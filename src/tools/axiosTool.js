@@ -3,11 +3,11 @@ import { Loading } from 'element-ui';
 import router from '../router';
 const qs = require('qs');//解决后端取不到值问题
 // axios.defaults.baseURL = "https://192.168.2.171:8443"; // 配置axios请求的地址
-axios.defaults.baseURL = process.env.NODE_ENV === 'production'?"http://115.29.67.135:8080":"http://192.168.2.171:8080"; // 配置axios请求的地址
+axios.defaults.baseURL = process.env.NODE_ENV === 'production'?"http://115.29.67.135:8080":"http://192.168.2.231:8080"; // 配置axios请求的地址
 // axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 axios.defaults.headers.post['Content-Type']='application/x-www-form-urlencoded';
 axios.defaults.crossDomain = true;
-axios.serverUrl = process.env.NODE_ENV === 'production'?"http://115.29.67.135:8080":"http://192.168.2.171:8080";
+axios.serverUrl = process.env.NODE_ENV === 'production'?"http://115.29.67.135:8080":"http://192.168.2.231:8080";
 let loadingNum=0;
 let loadingInstance=null;
 

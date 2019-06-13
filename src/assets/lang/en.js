@@ -11,7 +11,7 @@ const en={
       },
       {
           url:"/appHighSchool/listOfUniversities",
-          label:"Lists"
+          label:"Ranking"
       },
       {
           url:"/appHighSchool/optionalLibrary",
@@ -37,9 +37,9 @@ const en={
           value:"major"
       }
     ],
-    placeholder:"Search for interested information",
+    placeholder:"enter a university, summer school, or activity",
     searchBoxText:"Search",
-    news:"News",
+    news:"extracurricular activity",
     newAnnouncementList:[
       {
         label:"U.s.news 2019 college rankings released!",
@@ -73,19 +73,19 @@ const en={
           img:require("img/yxk.jpg")
       },
       {
-          label:"Select School",
+          label:"school matching system",
           link:"/appMatching",
           img:require("img/zxxt.jpg")
       }
     ],
-    highSchool:"School",
-    subTitle:"（Hot recommendation）",
-    more:"view more>>",
+    highSchool:"Hot ranking",
+    subTitle:"",
+    more:"view more rankings>>",
     attentionBtn:"Collect",
     attentionedBtn:"Collected",
     join:"Participants : ",
     qa:"Comments : ",
-    alumniComments:"Hot Comments",
+    alumniComments:"Latest Comments",
     commentOn:"commented on  ",
     publishIn:"Published in  ",
     viewCount:"Browse  ",
@@ -103,7 +103,7 @@ const en={
           type:"/appHighSchool/universityLibrary",
       },
       {
-          label:"Lists",
+          label:"Ranking",
           path:"/appHighSchool/listOfUniversities",
           type:"/appHighSchool/listOfUniversities",
       },
@@ -328,7 +328,7 @@ const en={
     loadMore:"view more",
   },
   listOfUniversities:{//高校榜单
-    title:"Lists",
+    title:"Ranking",
     introduce:"Based on Check U's understanding of School, the education evaluation lists of School and major are gathered",
     listTitle:["US NEWS","World","Hot","Most Competitive","Applicants Ranking","Acceptance Rate","Male/Female Ratio","Faculty Ranking","School Environment"],
     tabs0:"University",
@@ -588,9 +588,9 @@ const en={
   },
   appMatching:{//匹配
     title:"Intelligent matching system",
-    subTitle:"(Study in USA version)",
-    msg:"We will match school for you according to the basic<br/>information you fill in next",
-    btn:"Click to start match（U.S. Undergraduate）",
+    subTitle:"(Schools in USA only)",
+    msg:"The system will auto-match schools for you based on the basic<br/>information you fill in next",
+    btn:"click to match (U.S. Undergraduate)",
     step1:"Required Field",
     step2:"Optional Field",
     step3:"Consequence",
@@ -599,7 +599,7 @@ const en={
     placeholderTOEFL:"Fill in your TOEFL score",
     addMajor:"Add Major",
     majorText:"Major",
-    placeholderGPA:"Fill in your GPA score",
+    placeholderGPA:"fill in your GPA on a percentage scale",
     placeholderMajor:"fill in your major",
     haveTest:"Exam taken",
     noTest:"Exam not taken",

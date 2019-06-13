@@ -12,9 +12,9 @@
             </div>
             <div class="searchTools">
                 <div class="searchBox">
-                    <ul class="type">
+                    <!-- <ul class="type">
                         <li v-for="(item,index) in $t('appHome.searchTypeList')" :class="{'typeSelected':typeSelected==item.value}" @click="choseSearchType(item.value)">{{item.label}}</li>
-                    </ul>
+                    </ul> -->
                     <el-form ref="form" :model="form">
                         <el-form-item>
                             <div class="searchIcon">
@@ -44,11 +44,11 @@
                         {{ $t("appHome.news")}}
                     </div>
                     <ul class="list">
-                        <li v-for="(item,index) in $t('appHome.newAnnouncementList')">
-                            <a :href="item.link" target="_blank">
+                        <li v-for="(item,index) in activityList">
+                            <router-link :to="{name:'activityDetail',params:{type:'disciplineCompetition'},query:{id:item.id}}">
                                 <span class="circle"></span>
-                                {{item.label}}
-                            </a>
+                                {{item.title}}
+                            </router-link>
                         </li>
                     </ul>
                 </div>
@@ -71,10 +71,12 @@
                     </span>
                     {{ $t("appHome.highSchool")}}
                     <span class="subTitle">{{ $t("appHome.subTitle")}}</span>
-                    <span class="more">{{ $t("appHome.more")}}</span>
+                    <router-link to="/appHighSchool/listOfUniversities">
+                        <span class="more">{{ $t("appHome.more")}}</span>
+                    </router-link>
                 </div>
                 <ul class="main">
-                    <el-carousel :autoplay="false">
+                    <el-carousel :autoplay="false" :arrow="schoolList.length>1?'always':'never'">
                         <el-carousel-item v-for="(list,listIndex) in schoolList" :key="listIndex">
                                 <li v-for="(item,index) in list" class="schoolItem" @click="goInformation(item)">
                                     <div class="school">
@@ -202,6 +204,12 @@
                 //         img:require("img/zxxt.jpg")
                 //     }
                 // ],
+                activityList:[
+                    // {
+                    //     id:"1",
+                    //     name:"test"
+                    // }
+                ],
                 schoolList:[
                     // {
                     //     name_zh:"哈佛大学",
@@ -292,17 +300,36 @@
         },
         methods: {
             getCarouselList(){//获取轮播图片
-                console.log(self.$api)
                 self.$http.get(self.$api+'/school/getHomeImage', {
                 }).then(function (response) {
                     self.carouselList=response.data.resultMap.map(item=>self.$http.serverUrl+item.img_url);
-                    console.log(self.carouselList);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
+            getActivityList(){//获取活动库列表
+                self.$http.get(self.$api+'/activitydetails/getNew6ActivityDetail', {
+                    params:{
+                        language:self.$i18n.locale,
+                    }
+                }).then(function (response) {
+                    self.activityList=[];
+                    if(!!response){
+                        if(response.data.code=="200"){
+                            self.activityList=response.data.data.map(item=>{
+                                return {
+                                    id:item.id,
+                                    title:self.$i18n.locale=="en"?item.name_en:item.name_zh
+                                }
+                            })
+                            console.log(self.activityList)
+                        }
+                    }
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             getSchoolList(){//获取高校社区
-                console.log(self.$api)
                 self.$http.get(self.$api+'/school/selectTop9School', {
                     params:{
                         language:self.$i18n.locale
@@ -319,9 +346,7 @@
                         self.$set(item,"attentionType",item.isCollect=="true"?true:false)
                         let arrIndex=Math.floor(index/3)
                         self.schoolList[arrIndex].push(item)
-                    })
-                    console.log(self.schoolList)
-                    
+                    })                    
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -362,14 +387,13 @@
                 });
             },
             getSchoolComment(){//获取高校评论
-                self.$http.get(self.$api+'/schoolcomment/getHot9Comment', {
+                self.$http.get(self.$api+'/schoolcomment/getNew9Comment', {
                     params:{
                         language:self.$i18n.locale
                     }
                 }).then(function (response) {
-                    let list=response.data.hotCommentTop9;
+                    let list=response.data.newCommentTop9;
                     self.commentList=list.map((item)=>{
-                        console.log(item.allcommentids.split(","))
                         return {
                             headProtrait:self.$http.serverUrl+item.headUrl,
                             school_id:item.school_id,
@@ -420,6 +444,7 @@
         created(){
             self=this;
             self.getCarouselList();
+            self.getActivityList();
             self.getSchoolList();
             self.getSchoolComment();
         },

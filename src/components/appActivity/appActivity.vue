@@ -1,5 +1,5 @@
 <template>
-    <div class="appActivity">
+    <div class="appActivity containMain">
         <!-- 头部 -->
         <app-header not-index="true"></app-header>
         <!-- 内容区 -->

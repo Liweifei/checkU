@@ -38,9 +38,9 @@ let zh={
           value:"major"
       },
     ],
-    placeholder:"搜索你感兴趣的资讯",
+    placeholder:"搜索你感兴趣的大学、夏校、活动",
     searchBoxText:"搜索",
-    news:"最新公告",
+    news:"活动库",
     newAnnouncementList:[
         {
             label:"U.S.News2019全美大学排名公布！",
@@ -79,15 +79,15 @@ let zh={
           img:require("img/zxxt.jpg")
       }
     ],
-    highSchool:"高校社区",
-    subTitle:"热门高校推荐",
-    more:"更多>>",
+    highSchool:"热门学校排行榜",
+    subTitle:"",
+    more:"查看更多排行>>",
     attentionBtn:"关注",
     attentionedBtn:"已关注",
     join:"参与",
     question:"问题",
     qa:"回答",
-    alumniComments:"校友评论",
+    alumniComments:"最新评论",
     commentOn:"评论了",
     publishIn:"发表于",
     viewCount:"浏览了",
@@ -598,7 +598,7 @@ let zh={
     placeholderTOEFL:"请填写您的TOEFL分数",
     addMajor:"添加专业",
     majorText:"专业",
-    placeholderGPA:"请填写您的GPA分数",
+    placeholderGPA:"请按百分制填写您的 GPA 分数",
     placeholderMajor:"请填写您的专业",
     haveTest:"已考试",
     noTest:"未考试",

@@ -19,11 +19,40 @@
             background: $mainColor;
         }
     }
+
+    .comment{
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+
+        .el-input{
+            margin-bottom: 20px;
+
+            .el-input__inner{
+                height: 44px;
+                line-height: 44px;
+                background-color: #f4f4f4;
+                border-color: #dddddd;
+            }
+        }
+        .upload{
+            float: left;
+        }
+        button{
+            width: 120px;
+            float: right;
+            @include btnSymbol($mainColorNotUnit);
+        }
+    }
+
     .header{
         width: 100%;
         height: 60px;
         line-height: 60px;
         padding: 0 24px;
+        background-color: #f7f7f7;
         box-sizing: border-box;
         color: #999999;
         margin: 0;

@@ -72,6 +72,7 @@
                 })
             },
             setLang(type){
+                if(type==this.$i18n.locale)return;
                 localStorage.setItem("checkUlang",type)
                 this.$i18n.locale=type;
                 this.$root.eventHelper.$emit("reloadPage")

@@ -1,7 +1,7 @@
 <template>
 	<div class="appFooter">
         <div class="main">
-            <p class="content">© 2019 Copyright dazhongdianU.com<br/>All Rights Reserved.</p>
+            <p class="content">© 2019 Copyright studyabroad.top<br/>All Rights Reserved.</p>
         </div>
     </div>
 </template>

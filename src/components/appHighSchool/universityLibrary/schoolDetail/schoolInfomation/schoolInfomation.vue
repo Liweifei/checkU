@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div class="alumniComment">
+            <!-- <div class="alumniComment">
                 <h2 class="modelTitle">{{$t('schoolInfomation.alumniComments')}}</h2>
                 <ul class="commentList">
                     <li v-for="(item,index) in commentList">
@@ -216,15 +216,15 @@
                 <div class="loadMore">
                     <span v-show="loadMoreType" @click="loadMore">{{$t('schoolInfomation.loadMore')}}</span>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- 评论工具 -->
-        <app-commentTool ref="commentTool" @comment="commentNow"></app-commentTool>
+        <!-- <app-commentTool ref="commentTool" @comment="commentNow"></app-commentTool> -->
     </div>
 </template>
 
 <script type="text/javascript">
-    import appCommentTool from "@/components/appCommentTool/appCommentTool";
+    // import appCommentTool from "@/components/appCommentTool/appCommentTool";
     let self;
     export default{
         name: 'schoolInfomation',
@@ -352,26 +352,26 @@
                             self.gradeStudents.teachership=!!res.commentStudentList[0]?parseInt(res.commentStudentList[0].faculty):null;
 
                             // 评论
-                            self.commentList=[];
-                            res.schoolComment.forEach((item)=>{
-                                let likeType=!!item.allcommentids.split(",").find(id=>self.$store.getters.getUserId==id)?1:0;
-                                self.commentList.push({
-                                    headProtrait:item.headUrl,
-                                    name:item.nickName,
-                                    school_id:item.school_id,
-                                    comment_id:item.id,
-                                    time:item.comment_time,
-                                    content:item.comment_details,
-                                    viewCount:item.view_count,
-                                    commentNum:parseInt(item.child_num),
-                                    likeNum:item.num,
-                                    likeType:likeType,
-                                    imgList:[],
-                                })
-                            })
-                            if(self.commentList.length>1){//默认显示2条评论，只有一条的话证明不需要loadMore
-                                self.loadMoreType=true;
-                            }
+                            // self.commentList=[];
+                            // res.schoolComment.forEach((item)=>{
+                            //     let likeType=!!item.allcommentids.split(",").find(id=>self.$store.getters.getUserId==id)?1:0;
+                            //     self.commentList.push({
+                            //         headProtrait:item.headUrl,
+                            //         name:item.nickName,
+                            //         school_id:item.school_id,
+                            //         comment_id:item.id,
+                            //         time:item.comment_time,
+                            //         content:item.comment_details,
+                            //         viewCount:item.view_count,
+                            //         commentNum:parseInt(item.child_num),
+                            //         likeNum:item.num,
+                            //         likeType:likeType,
+                            //         imgList:[],
+                            //     })
+                            // })
+                            // if(self.commentList.length>1){//默认显示2条评论，只有一条的话证明不需要loadMore
+                            //     self.loadMoreType=true;
+                            // }
                         }
                     }
                 }).catch(function (error) {
@@ -441,7 +441,7 @@
             self.getInfo();
         },
         components:{
-            "app-commentTool":appCommentTool,
+            // "app-commentTool":appCommentTool,
         }
     }
 

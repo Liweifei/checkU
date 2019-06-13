@@ -28,8 +28,8 @@
                 </div>
                 <div class="right">
                     <div class="name">
-                        <h3 class="nameCn">{{nameCn}}</h3>
-                        <h3 class="nameEn">{{nameEn}}</h3>
+                        <h3 class="nameCn">{{$i18n.locale=='en'?nameEn:nameCn}}</h3>
+                        <h3 class="nameEn" v-if="$i18n.locale=='zh'">{{nameEn}}</h3>
                     </div>
                     <div class="btnGroup">
                         <button class="attention" @click="setCollectType">
